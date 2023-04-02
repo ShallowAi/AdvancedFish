@@ -1,6 +1,6 @@
 # Advanced Fish - 高级钓鱼
 
-## 此插件原作者已停止维护! 此仓库为xiaoyueyoqwq和HF代理更新！
+## 此插件原作者已停止维护! 此仓库为xiaoyueyoqwq和CBer_SuXuan代理更新！
 
 ## 高级钓鱼，高度自定义，不止钓鱼!
 
