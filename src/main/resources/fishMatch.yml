@@ -1,0 +1,546 @@
+# 钓鱼比赛
+# 每场钓鱼比赛时间多长 分钟为单位 只能为整数
+# 钓鱼是一个比较无聊的过程，所以我推荐您设置为五分钟，如果奖励比较丰厚的话，则将冷却时间调高，或将人数限制调高增加挑战性
+TIME: 5
+
+# 冷却时间 分钟为单位
+COUNT-DOWN: 120
+
+# 是否可以让玩家在比赛开始后加入?
+JOIN-AFTER-START: true
+
+# 循环信息发送
+# 当有玩家举办后，我们是否应该每隔多少秒便发送 HOLD 效果让玩家加入?
+LOOP:
+  ENABLE: true
+  SECONDS: 10
+
+# 我们应该给所有玩家发送循环的 HOLD 信息，还是只给未加入的人发?
+# 若开启则为给全部人
+JOINED-PLAYER-SHOW-HOLD: false
+
+# 当有玩家加入比赛后，我们应该向全部玩家展示加入效果，还是向已加入的玩家展示效果?
+# 若开启，则为全部玩家展示效果
+PLAYER-JOIN-SHOW-ALL-PLAYER: true
+
+# 比赛最低人数，即必须要高于或等于这里的数才可以正常举办比赛
+MIN-PLAYER: 0
+
+# 玩家举办比赛
+HOLD:
+  TITLE:
+    MAIN-TITLE: "&6钓鱼比赛!"
+    SUB-TITLE: "&e玩家 <rplayer> 举办了钓鱼比赛!"
+    FADE-IN: 20
+    FADE-OUT: 20
+    STAY: 20
+  PARTICLE:
+    - ""
+  SOUNDS:
+    - "ENTITY_PLAYER_LEVELUP;1;1"
+  COMMANDS:
+    PLAYER:
+      - ""
+    CONSOLE:
+      - ""
+  MESSAGE:
+    - "&7[&6&l钓鱼助手&7] &e玩家 <rplayer> 举办了钓鱼比赛! 您可以使用 /fishMatch join 加入钓鱼比赛!"
+  ANNOUNCEMENT:
+    - ""
+  EFFECTS:
+    - ""
+  HEALTH: 0
+  HUNGER: 0
+  EXP: 0
+  ACTION-BAR:
+    TIME: 0
+    MESSAGE: ""
+  BOSS-BAR:
+    TIME: 0
+    MESSAGE: ""
+    COLOR: RANDOM
+    STYLE: RANDOM
+
+# 比赛开始倒计时
+COUNTDOWN:
+  TITLE:
+    MAIN-TITLE: "&6<s>"
+    SUB-TITLE: "&e距离比赛开始 还有 <s> 秒!"
+    FADE-IN: 20
+    FADE-OUT: 20
+    STAY: 20
+  PARTICLE:
+    - ""
+  SOUNDS:
+    - "ENTITY_PLAYER_LEVELUP;1;1"
+  COMMANDS:
+    PLAYER:
+      - ""
+    CONSOLE:
+      - ""
+  MESSAGE:
+    - "&7[&6&l钓鱼助手&7] &e距离比赛开始 还有 <s> 秒!"
+  ANNOUNCEMENT:
+    - ""
+  EFFECTS:
+    - ""
+  HEALTH: 0
+  HUNGER: 0
+  EXP: 0
+  ACTION-BAR:
+    TIME: 0
+    MESSAGE: ""
+  BOSS-BAR:
+    TIME: 0
+    MESSAGE: ""
+    COLOR: RANDOM
+    STYLE: RANDOM
+
+# 钓鱼比赛开始
+START:
+  TITLE:
+    MAIN-TITLE: "&6比赛开始!"
+    SUB-TITLE: "&e从现在开始努力钓鱼吧!"
+    FADE-IN: 20
+    FADE-OUT: 20
+    STAY: 20
+  PARTICLE:
+    - ""
+  SOUNDS:
+    - "ENTITY_PLAYER_LEVELUP;1;1"
+  COMMANDS:
+    PLAYER:
+      - ""
+    CONSOLE:
+      - ""
+  MESSAGE:
+    - "&7[&6&l钓鱼助手&7] &6比赛开始! &c从现在开始努力钓鱼吧!"
+  ANNOUNCEMENT:
+    - ""
+  EFFECTS:
+    - ""
+  HEALTH: 0
+  HUNGER: 0
+  EXP: 0
+  ACTION-BAR:
+    TIME: 0
+    MESSAGE: ""
+  BOSS-BAR:
+    TIME: 0
+    MESSAGE: ""
+    COLOR: RANDOM
+    STYLE: RANDOM
+
+# 玩家进入
+PLAYER_JOIN:
+  TITLE:
+    MAIN-TITLE: "&6<rplayer>"
+    SUB-TITLE: "&e<rplayer> 加入了比賽!"
+    FADE-IN: 20
+    FADE-OUT: 20
+    STAY: 20
+  PARTICLE:
+    - ""
+  SOUNDS:
+    - "ENTITY_PLAYER_LEVELUP;1;1"
+  COMMANDS:
+    PLAYER:
+      - ""
+    CONSOLE:
+      - ""
+  MESSAGE:
+    - "&7[&6&l钓鱼助手&7] &e<rplayer> 加入了比賽!"
+  ANNOUNCEMENT:
+    - ""
+  EFFECTS:
+    - ""
+  HEALTH: 0
+  HUNGER: 0
+  EXP: 0
+  ACTION-BAR:
+    TIME: 0
+    MESSAGE: ""
+  BOSS-BAR:
+    TIME: 0
+    MESSAGE: ""
+    COLOR: RANDOM
+    STYLE: RANDOM
+
+# 玩家退出
+PLAYER_LEAVE:
+  TITLE:
+    MAIN-TITLE: "&7退出比赛!"
+    SUB-TITLE: "&e您已成功退出比赛!"
+    FADE-IN: 20
+    FADE-OUT: 20
+    STAY: 20
+  PARTICLE:
+    - ""
+  SOUNDS:
+    - "ENTITY_PLAYER_LEVELUP;1;1"
+  COMMANDS:
+    PLAYER:
+      - ""
+    CONSOLE:
+      - ""
+  MESSAGE:
+    - "&7[&6&l钓鱼助手&7] &e您已成功退出比赛!"
+  ANNOUNCEMENT:
+    - ""
+  EFFECTS:
+    - ""
+  HEALTH: 0
+  HUNGER: 0
+  EXP: 0
+  ACTION-BAR:
+    TIME: 0
+    MESSAGE: ""
+  BOSS-BAR:
+    TIME: 0
+    MESSAGE: ""
+    COLOR: RANDOM
+    STYLE: RANDOM
+
+# 比赛结束
+ENDED:
+  TITLE:
+    MAIN-TITLE: "&6比赛结束!"
+    SUB-TITLE: "&e您可以使用 /census 查看统计信息"
+    FADE-IN: 20
+    FADE-OUT: 20
+    STAY: 20
+  PARTICLE:
+    - ""
+  SOUNDS:
+    - "ENTITY_PLAYER_LEVELUP;1;1"
+  COMMANDS:
+    PLAYER:
+      - ""
+    CONSOLE:
+      - ""
+  MESSAGE:
+    - "&7[&6&l钓鱼助手&7] &6比赛结束! &e您可以使用 /census 查看统计信息! 前三名的奖励将会在 3 秒后发放! 请不要退出并确定背包内拥有足够的空位!"
+  ANNOUNCEMENT:
+    - ""
+  EFFECTS:
+    - ""
+  HEALTH: 0
+  HUNGER: 0
+  EXP: 0
+  ACTION-BAR:
+    TIME: 0
+    MESSAGE: ""
+  BOSS-BAR:
+    TIME: 0
+    MESSAGE: ""
+    COLOR: RANDOM
+    STYLE: RANDOM
+
+# 结束倒计时
+COUNTDOWN_END:
+  TITLE:
+    MAIN-TITLE: "&6<s>"
+    SUB-TITLE: "&e距离比赛结束 还有 <s> 秒!"
+    FADE-IN: 20
+    FADE-OUT: 20
+    STAY: 20
+  PARTICLE:
+    - ""
+  SOUNDS:
+    - "ENTITY_PLAYER_LEVELUP;1;1"
+  COMMANDS:
+    PLAYER:
+      - ""
+    CONSOLE:
+      - ""
+  MESSAGE:
+    - "&7[&6&l钓鱼助手&7] &e距离比赛结束 还有 <s> 秒!"
+  ANNOUNCEMENT:
+    - ""
+  EFFECTS:
+    - ""
+  HEALTH: 0
+  HUNGER: 0
+  EXP: 0
+  ACTION-BAR:
+    TIME: 0
+    MESSAGE: ""
+  BOSS-BAR:
+    TIME: 0
+    MESSAGE: ""
+    COLOR: RANDOM
+    STYLE: RANDOM
+
+# 人数不足
+INSUFFICIENT:
+  TITLE:
+    MAIN-TITLE: "&7人数不足!"
+    SUB-TITLE: "&7人数不足! 已取消此次比赛举办!"
+    FADE-IN: 20
+    FADE-OUT: 20
+    STAY: 20
+  PARTICLE:
+    - "CAMPFIRE_COSY_SMOKE;1;1;1;50;ONLINE;FALSE"
+  SOUNDS:
+    - "ENTITY_IRON_GOLEM_DAMAGE;1;1"
+  COMMANDS:
+    PLAYER:
+      - ""
+    CONSOLE:
+      - ""
+  MESSAGE:
+    - "&7[&6&l钓鱼助手&7] &7人数不足! 已取消此次比赛举办!"
+  ANNOUNCEMENT:
+    - ""
+  EFFECTS:
+    - ""
+  HEALTH: 0
+  HUNGER: 0
+  EXP: 0
+  ACTION-BAR:
+    TIME: 0
+    MESSAGE: ""
+  BOSS-BAR:
+    TIME: 0
+    MESSAGE: ""
+    COLOR: RANDOM
+    STYLE: RANDOM
+
+# 玩家断线重连
+# 如果玩家在比赛开始后断线了 但是这个玩家有积分 那么就帮助他自动加入钓鱼比赛，并且显示下面的效果
+PLAYER_REJOIN:
+  TITLE:
+    MAIN-TITLE: "&6断线重连!"
+    SUB-TITLE: "&7检测到您在钓鱼比赛内断线 自动重连!"
+    FADE-IN: 20
+    FADE-OUT: 20
+    STAY: 20
+  PARTICLE:
+    - "CAMPFIRE_COSY_SMOKE;1;1;1;50;ONLINE;FALSE"
+  SOUNDS:
+    - "ENTITY_IRON_GOLEM_DAMAGE;1;1"
+  COMMANDS:
+    PLAYER:
+      - ""
+    CONSOLE:
+      - ""
+  MESSAGE:
+    - "&7[&6&l钓鱼助手&7] &6断线重连! &7检测到您在钓鱼比赛内断线 自动重连! 您目前的积分为: &e<nowinteger>&7!"
+  ANNOUNCEMENT:
+    - ""
+  EFFECTS:
+    - ""
+  HEALTH: 0
+  HUNGER: 0
+  EXP: 0
+  ACTION-BAR:
+    TIME: 0
+    MESSAGE: ""
+  BOSS-BAR:
+    TIME: 0
+    MESSAGE: ""
+    COLOR: RANDOM
+    STYLE: RANDOM
+
+# 等待多久后发布获奖奖励?
+# 我非常不建议您把这个值设置的等于 20
+# 您起码需要让玩家看清楚上一条结束时的信息，将此项分配为三秒会刚好在看完标题后给予
+# 单位为 ticks, 20ticks = 1s
+LATER: 60
+
+# 奖励给予
+# 如果您要给予玩家物品作为奖励，您则需要在结束或者开始的时候让玩家空着背包，我不确定如果玩家背包没有空位会发生什么
+# 或者您可以增加 LATER 时间，让玩家由足够的空闲时间清空背包
+REWARDGIVE:
+  # 这里是设置不同排名给予不同奖励
+  # 格式为: 排名;编号
+  # 注意，排名必须为数字，如果说这个排名没有对应的玩家则会忽略
+  # 编号必须为英文字母 如 A B C D
+  #
+  # 如果您想给指定名额以后的玩家参与奖
+  # 格式为: 此排名以后的玩家给予参与奖;default
+  #
+  # 具体实例可以看下面的配置
+  DEFAULT-MIN: 20 # 必须达到多少积分以上才可以拿到参与奖 (防止进去就退出的玩家)
+  PLAYER:
+    - "1;A"
+    - "2;B"
+    - "3;C"
+    - "4;default" # 这里是给予第4名 (包括第4名) 以后的玩家参与奖 (注意，此处必须要填写 default 否则只是给予指定的名额)
+
+  A:
+    TITLE:
+      MAIN-TITLE: "&6第一名!"
+      SUB-TITLE: "&e您是第一名! 您已经收到了此次获奖奖励!"
+      FADE-IN: 20
+      FADE-OUT: 20
+      STAY: 20
+    PARTICLE:
+      - "FLAME;1;1;1;50;PLAYER;FALSE"
+    SOUNDS:
+      - "ENTITY_PLAYER_LEVELUP;1;1"
+    # 这里可以使用指令给予玩家相对的奖励
+    # 您也可以给予玩家 advanced fish 的物品奖励，而且这不仅限于给予鱼，详细请看此 wiki
+    # https://gitee.com/A2000000/advanced-fish/wikis/%E8%AE%A9%E9%92%93%E9%B1%BC%E9%92%93%E5%88%B0%E9%9D%9E%E9%B1%BC%E7%89%A9%E5%93%81%EF%BC%8C%E4%B8%8D%E4%BB%85%E4%BB%85%E4%BB%85%E9%99%90%E4%BA%8E%E9%B1%BC
+    # 使用控制台给予奖励的指令为 afc 您可以在控制台输入这个指令查看使用介绍
+    COMMANDS:
+      PLAYER:
+        - ""
+      CONSOLE:
+        - ""
+    MESSAGE:
+      - "&7[&6&l钓鱼助手&7] &e您是第一名! 您已经收到了此次获奖奖励!"
+    ANNOUNCEMENT:
+      - ""
+    EFFECTS:
+      - ""
+    HEALTH: 0
+    HUNGER: 0
+    EXP: 0
+    ACTION-BAR:
+      TIME: 0
+      MESSAGE: ""
+    BOSS-BAR:
+      TIME: 0
+      MESSAGE: ""
+      COLOR: RANDOM
+      STYLE: RANDOM
+
+  B:
+    TITLE:
+      MAIN-TITLE: "&6第二名!"
+      SUB-TITLE: "&e您是第二名! 您已经收到了此次获奖奖励!"
+      FADE-IN: 20
+      FADE-OUT: 20
+      STAY: 20
+    PARTICLE:
+      - "FLAME;1;1;1;50;PLAYER;FALSE"
+    SOUNDS:
+      - "ENTITY_PLAYER_LEVELUP;1;1"
+    COMMANDS:
+      PLAYER:
+        - ""
+      CONSOLE:
+        - ""
+    MESSAGE:
+      - "&7[&6&l钓鱼助手&7] &e您是第二名! 您已经收到了此次获奖奖励!"
+    ANNOUNCEMENT:
+      - ""
+    EFFECTS:
+      - ""
+    HEALTH: 0
+    HUNGER: 0
+    EXP: 0
+    ACTION-BAR:
+      TIME: 0
+      MESSAGE: ""
+    BOSS-BAR:
+      TIME: 0
+      MESSAGE: ""
+      COLOR: RANDOM
+      STYLE: RANDOM
+
+  C:
+    TITLE:
+      MAIN-TITLE: "&6第三名!"
+      SUB-TITLE: "&e您是第三名! 您已经收到了此次获奖奖励!"
+      FADE-IN: 20
+      FADE-OUT: 20
+      STAY: 20
+    PARTICLE:
+      - "FLAME;1;1;1;50;PLAYER;FALSE"
+    SOUNDS:
+      - "ENTITY_PLAYER_LEVELUP;1;1"
+    COMMANDS:
+      PLAYER:
+        - ""
+      CONSOLE:
+        - ""
+    MESSAGE:
+      - "&7[&6&l钓鱼助手&7] &e您是第三名! 您已经收到了此次获奖奖励!"
+    ANNOUNCEMENT:
+      - ""
+    EFFECTS:
+      - ""
+    HEALTH: 0
+    HUNGER: 0
+    EXP: 0
+    ACTION-BAR:
+      TIME: 0
+      MESSAGE: ""
+    BOSS-BAR:
+      TIME: 0
+      MESSAGE: ""
+      COLOR: RANDOM
+      STYLE: RANDOM
+
+  # 这里是参与奖设置
+  default:
+    TITLE:
+      MAIN-TITLE: "&7很遗憾"
+      SUB-TITLE: "&7您并不是前三，当您依然可以获得部分奖励!"
+      FADE-IN: 20
+      FADE-OUT: 20
+      STAY: 20
+    PARTICLE:
+      - "FLAME;1;1;1;50;PLAYER;FALSE"
+    SOUNDS:
+      - "ENTITY_PLAYER_LEVELUP;1;1"
+    COMMANDS:
+      PLAYER:
+        - ""
+      CONSOLE:
+        - ""
+    MESSAGE:
+      - "&7[&6&l钓鱼助手&7] &7很遗憾，您并不是前三，当您依然可以获得部分奖励! 奖励已经发送给到您的背包!"
+    ANNOUNCEMENT:
+      - ""
+    EFFECTS:
+      - ""
+    HEALTH: 0
+    HUNGER: 0
+    EXP: 0
+    ACTION-BAR:
+      TIME: 0
+      MESSAGE: ""
+    BOSS-BAR:
+      TIME: 0
+      MESSAGE: ""
+      COLOR: RANDOM
+      STYLE: RANDOM
+
+  # 如果玩家积分小于 DEFAULT-MIN 则给此玩家显示这里的效果
+  default-min-effect:
+    TITLE:
+      MAIN-TITLE: "&7很遗憾"
+      SUB-TITLE: "&7您并不是前三，且积分小于 20"
+      FADE-IN: 20
+      FADE-OUT: 20
+      STAY: 20
+    PARTICLE:
+      - "FLAME;1;1;1;50;PLAYER;FALSE"
+    SOUNDS:
+      - "ENTITY_PLAYER_LEVELUP;1;1"
+    COMMANDS:
+      PLAYER:
+        - ""
+      CONSOLE:
+        - ""
+    MESSAGE:
+      - "&7[&6&l钓鱼助手&7] &7很遗憾，您并不是前三，且积分小于 20，所以您没有获得奖励。"
+    ANNOUNCEMENT:
+      - ""
+    EFFECTS:
+      - ""
+    HEALTH: 0
+    HUNGER: 0
+    EXP: 0
+    ACTION-BAR:
+      TIME: 0
+      MESSAGE: ""
+    BOSS-BAR:
+      TIME: 0
+      MESSAGE: ""
+      COLOR: RANDOM
+      STYLE: RANDOM
+

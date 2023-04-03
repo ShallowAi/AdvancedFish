@@ -1,0 +1,30 @@
+NO-PERM-MESSAGE: "&c您没有权限这么做!"
+RELOAD: "&a重注册完成!"
+
+# 钓鱼比赛消息
+MATCH-HAS-BEEN-START:
+  - "&7[&6&l钓鱼助手&7] 目前已经有一个比赛正在进行，您无法再次开启一个比赛! 您可以使用 /fishMatch join 来加入比赛!"
+
+START-COOLDOWN:
+  - "&7[&6&l钓鱼助手&7] 不久之前已经开启了一个钓鱼比赛! 您需要耐心等待一段时间才可以再次开启!"
+
+MATCH-NOT-HELD:
+  - "&7[&6&l钓鱼助手&7] 目前没有钓鱼比赛正在举办，因此您无法加入!"
+
+CANT-JOIN-AFTER-START:
+  - "&7[&6&l钓鱼助手&7] 目前钓鱼比赛已经开始，因此您无法加入! 请等待下一次举办!"
+
+MATCH-NOT-HELD-BUT-LEAVE:
+  - "&7[&6&l钓鱼助手&7] 目前没有钓鱼比赛正在举办，因此您无法退出任何比赛!"
+
+MATCH-NOT-HELD-BUT-SET-INTEGRAL:
+  - "&7[&6&l钓鱼助手&7] 目前没有钓鱼比赛正在举办，因此您无法为任何玩家添加积分!"
+
+JOINED-BUT-USE-JOIN-COMMAND:
+  - "&7[&6&l钓鱼助手&7] 您已经加入钓鱼比赛了!"
+
+NOT-IN-MATCH-BUT-USE-LEAVE-COMMAND:
+  - "&7[&6&l钓鱼助手&7] 您并没有在一个钓鱼比赛中!"
+
+CENSUS-GUI-OVERDUE:
+  - "&7[&6&l钓鱼助手&7] 您目前无法查看排行界面，可能是此排行有效查看期已过。"

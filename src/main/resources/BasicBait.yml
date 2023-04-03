@@ -1,0 +1,188 @@
+# 注: 在 0.0.9 版本后已取消 ENABLE/SHOW 这种无用设置，若想关闭请直接设置为 ""
+#
+# 自动重载: 由于 Advanced Fish 会把一些热数据存储到内存中，所以部分配置是无法被 自动重载 的
+# 就算配置文件内的更改被应用，但是内存中的热数据并不会跟随同步，这将意味着会有数据不同步的问题
+# 因此如果您的更改涉及到了以下这些，则必须手动重载插件，使用指令 玩家 - /af reload 控制台 - afc reload
+#
+# 除 USE / CUSTOM-FORMULA / 物品名称 以外，其余配置是可以被 自动重载 的，这将意味着您可以无需重载插件，修改后保存即刻应用
+#
+# 您可以查看wiki以获得最基础的教程: https://gitee.com/A2000000/advanced-fish/wikis
+ITEM:
+  # 物品规定 其语法与鱼类一样
+  # 鱼饵一样可以使用 <owner> 选项设置制作玩家
+  NAME: "&7基础鱼饵"
+  MATERIAL: BROWN_MUSHROOM
+  URL-HEAD: ""
+  DATA: 0
+  AMOUNT: 1
+  LORE:
+    - "&8&m----------------------------"
+    - "&b&l基础信息:"
+    - " &e名称&7: &7基础鱼饵"
+    - " &e稀有度&7: &7☆☆☆☆☆"
+    - " &6制作者&7: &6<owner>"
+    - " "
+    - "&b&l描述:"
+    - " &7这是很常见的鱼饵，非常简易。"
+    - " "
+    - "&8&l尘封的描述:"
+    - " &8&o在副手似乎就可以使用这个鱼饵了..."
+    - "&8&m----------------------------"
+
+  # 使用条件，即必须要满足以下条件此鱼饵才可以被玩家使用
+  # 其语法与鱼类一样
+  CONDITION:
+    INVENTORY-HAVE:
+      - ""
+    ROD-HAVE-ENCHANT:
+      - ""
+    PLAYER-HAVE-EFFECTS:
+      - ""
+    LEVEL: 0
+
+# 当玩家没有达到使用条件便尝试使用此鱼饵钓鱼时所发送的信息
+MESSAGE:
+  - "&7[我] &c怎么回事... 看起来我还没法使用这个鱼饵..."
+  - "&7[&d服务器娘&7] &c您目前无法使用此鱼饵钓鱼，此次钓鱼操作已被取消。"
+
+# 与鱼类类似，鱼饵的限制使用设置
+USE:
+  CAN-BUILD: false
+  CAN-CRAFT: false
+  CAN-COMBUSTION: false
+  CAN-ANVIL: false
+  CAN-ENCHANT: false
+
+# 食用设置
+EATING:
+  CAN-EAT: true
+
+  EFFECTS:
+    - "confusion;600;10"
+
+  TITLE:
+    MAIN-TITLE: "&c????"
+    SUB-TITLE: "&7我怎么吃了鱼食..???"
+    FADE-IN: 20
+    FADE-OUT: 20
+    STAY: 20
+
+  COMMANDS:
+    PLAYER:
+      - ""
+    CONSOLE:
+      - ""
+
+  ANNOUNCEMENT:
+    - "&7[&d服务器娘&7] &a<player> &7居然吃了鱼食... 真是令人作呕呐..."
+
+  MESSAGE:
+    - "&7[我] &7我怎么吃了鱼食..???"
+
+  PARTICLE:
+    - "FLAME;1;1;1;50;PLAYER;FALSE"
+
+  SOUNDS:
+    - "ENTITY_IRON_GOLEM_DAMAGE;1;1"
+
+  HEALTH: 0
+  HUNGER: 0
+  EXP: 0
+
+  ACTION-BAR:
+    TIME: 0
+    MESSAGE: ""
+  BOSS-BAR:
+    TIME: 0
+    MESSAGE: ""
+    COLOR: RANDOM
+    STYLE: RANDOM
+
+CUSTOM-FORMULA:
+  # 这里是自定义合成配方
+  # 这里比较难以理解，我大概的讲一下，下面的 FORMULA 有三行 每一行有三个字符
+  # 这就是工作台的格子，之后您需要在其中填写合成此鱼饵的原料，但是注意: 原料只能由一个字母组成 只能一个字母!
+  #
+  # 比如说我在这里写的为:
+  # 第一行: 空格空格A
+  # 第二行: 空格空格B
+  # 第三行: 空格空格C
+  #
+  # 这就是工作台所对应的配方，接下来我们需要去 ITEMS 来定义 A B C 的物品是什么
+  #
+  ENABLE: true # 此处的 ENABLE 依然有效
+  LINE1: "  A"
+  LINE2: "  B"
+  LINE3: "  C"
+
+  # 这里填写上面的对应物品
+  # 格式: 原料对应的字母;物品
+  ITEMS:
+    - "A;KELP"
+    - "B;BOWL"
+    - "C;SUGAR"
+
+# 生物群系列表 (1.19)
+# OCEAN
+# PLAINS
+# DESERT
+# WINDSWEPT_HILLS
+# FOREST
+# TAIGA
+# SWAMP
+# MANGROVE_SWAMP
+# RIVER
+# NETHER_WASTES
+# THE_END
+# FROZEN_OCEAN
+# FROZEN_RIVER
+# SNOWY_PLAINS
+# MUSHROOM_FIELDS
+# BEACH
+# JUNGLE
+# SPARSE_JUNGLE
+# DEEP_OCEAN
+# STONY_SHORE
+# SNOWY_BEACH
+# BIRCH_FOREST
+# DARK_FOREST
+# SNOWY_TAIGA
+# OLD_GROWTH_PINE_TAIGA
+# WINDSWEPT_FOREST
+# SAVANNA
+# SAVANNA_PLATEAU
+# BADLANDS
+# WOODED_BADLANDS
+# SMALL_END_ISLANDS
+# END_MIDLANDS
+# END_HIGHLANDS
+# END_BARRENS
+# WARM_OCEAN
+# LUKEWARM_OCEAN
+# COLD_OCEAN
+# DEEP_LUKEWARM_OCEAN
+# DEEP_COLD_OCEAN
+# DEEP_FROZEN_OCEAN
+# THE_VOID
+# SUNFLOWER_PLAINS
+# WINDSWEPT_GRAVELLY_HILLS
+# FLOWER_FOREST
+# ICE_SPIKES
+# OLD_GROWTH_BIRCH_FOREST
+# OLD_GROWTH_SPRUCE_TAIGA
+# WINDSWEPT_SAVANNA
+# ERODED_BADLANDS
+# BAMBOO_JUNGLE
+# SOUL_SAND_VALLEY
+# CRIMSON_FOREST
+# WARPED_FOREST
+# BASALT_DELTAS
+# DRIPSTONE_CAVES
+# LUSH_CAVES
+# DEEP_DARK
+# MEADOW
+# GROVE
+# SNOWY_SLOPES
+# FROZEN_PEAKS
+# JAGGED_PEAKS
+# STONY_PEAKS

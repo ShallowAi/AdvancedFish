@@ -1,0 +1,333 @@
+ITEM:
+  NAME: "&7带鱼"
+  MATERIAL: COD
+  URL-HEAD: ""
+  DATA: 0
+  AMOUNT: 1
+  LORE:
+    - "&8&m----------------------------"
+    - "&b&l基础信息:"
+    - " &e名称&7: &7带鱼"
+    - " &e稀有度&7: &6★&7☆☆☆☆"
+    - " &6钓手&7: &6<owner>"
+    - " "
+    - "&b&l描述:"
+    - " &7头狭长,尖突吻尖长。眼中大,位高,眼间隔平坦,中央微凸..."
+    - " "
+    - "&8&l尘封的描述:"
+    - " &8&o此鱼需要玩家拥有 木剑 时才可以捕捞..."
+    - "&8&m----------------------------"
+  ENCHANT:
+    - ""
+  PROBABILITY: 80
+
+  CONDITION:
+    INVENTORY-HAVE:
+      - ""
+    ROD-HAVE-ENCHANT:
+      - ""
+    PLAYER-HAVE-EFFECTS:
+      - ""
+    LEVEL: 0
+
+  CAUGHT:
+    TITLE:
+      MAIN-TITLE: "&7带鱼!"
+      SUB-TITLE: "&e这家伙... 肯定不能生吃..."
+      FADE-IN: 20
+      FADE-OUT: 20
+      STAY: 20
+
+    PARTICLE:
+      - ""
+
+    SOUNDS:
+      - "ENTITY_PLAYER_LEVELUP;1;1"
+
+    COMMANDS:
+      PLAYER:
+        - ""
+      CONSOLE:
+        - ""
+
+    MESSAGE:
+      - "&7[&6&l钓鱼助手&7] &e恭喜您! 您钓到了: &7带鱼&e!"
+
+    ANNOUNCEMENT:
+      - ""
+
+    EFFECTS:
+      - ""
+
+    HEALTH: 0.0
+    HUNGER: 0
+    EXP: 100
+
+    ACTION-BAR:
+      TIME: 0
+      MESSAGE: ""
+    BOSS-BAR:
+      TIME: 0
+      MESSAGE: ""
+      COLOR: RANDOM
+      STYLE: RANDOM
+
+    REMOVE-DROP-EXP: true
+
+  BITE:
+    EFFECTS:
+      - "slow;20;5"
+      - "blindness;40;5"
+    TITLE:
+      MAIN-TITLE: "&c咬钩!"
+      SUB-TITLE: "&a趁着这个机会，尽快拉钓!"
+      FADE-IN: 20
+      FADE-OUT: 20
+      STAY: 20
+    COMMANDS:
+      PLAYER:
+        - ""
+      CONSOLE:
+        - ""
+    ANNOUNCEMENT:
+      - ""
+    MESSAGE:
+      - "&7[&6&l钓鱼助手&7] &c咬钩! 趁着这个机会，赶快拉钩!"
+    PARTICLE:
+      - "FLAME;1;1;1;50;PLAYER;FALSE"
+    SOUNDS:
+      - "BLOCK_CHEST_OPEN;1;1"
+    HEALTH: 0
+    HUNGER: 0
+    EXP: 0
+    ACTION-BAR:
+      TIME: 0
+      MESSAGE: ""
+    BOSS-BAR:
+      TIME: 0
+      MESSAGE: ""
+      COLOR: RANDOM
+      STYLE: RANDOM
+
+  FAILED:
+    EFFECTS:
+      - "slow;20;5"
+      - "blindness;40;5"
+    TITLE:
+      MAIN-TITLE: "&7空军..!"
+      SUB-TITLE: "&a继续... 钓鱼佬永不空军!"
+      FADE-IN: 20
+      FADE-OUT: 20
+      STAY: 20
+    COMMANDS:
+      PLAYER:
+        - ""
+      CONSOLE:
+        - ""
+    ANNOUNCEMENT:
+      - ""
+    MESSAGE:
+      - "&7[&6&l钓鱼助手&7] &7空军... &a继续... 钓鱼佬永不空军!"
+    PARTICLE:
+      - "FLAME;1;1;1;50;PLAYER;FALSE"
+    SOUNDS:
+      - "ENTITY_IRON_GOLEM_DAMAGE;1;1"
+
+    HEALTH: 0
+    HUNGER: 0
+    EXP: 0
+    ACTION-BAR:
+      TIME: 0
+      MESSAGE: ""
+    BOSS-BAR:
+      TIME: 0
+      MESSAGE: ""
+      COLOR: RANDOM
+      STYLE: RANDOM
+
+EATING:
+  CAN-EAT: true
+
+  EFFECTS:
+    - "confusion;600;20"
+
+  TITLE:
+    MAIN-TITLE: "&c生吃带鱼...???"
+    SUB-TITLE: "&4浓厚的鱼腥味道..."
+    FADE-IN: 20
+    FADE-OUT: 20
+    STAY: 20
+
+  COMMANDS:
+    PLAYER:
+      - ""
+    CONSOLE:
+      - ""
+
+  ANNOUNCEMENT:
+    - ""
+
+  MESSAGE:
+    - "&7[&d服务器娘&7] &a<player> &7居然吃了一条... 生的带鱼...?? 让我们为 TA 鼓掌..."
+
+  PARTICLE:
+    - "FLAME;1;1;1;50;PLAYER;FALSE"
+
+  SOUNDS:
+    - "ENTITY_IRON_GOLEM_DAMAGE;1;1"
+
+  HEALTH: 0
+  HUNGER: 1
+  EXP: 0
+
+  ACTION-BAR:
+    TIME: 0
+    MESSAGE: ""
+  BOSS-BAR:
+    TIME: 0
+    MESSAGE: ""
+    COLOR: RANDOM
+    STYLE: RANDOM
+
+USE:
+  CAN-BUILD: false
+  CAN-CRAFT: false
+  CAN-COMBUSTION: true
+  CAN-ANVIL: false
+  CAN-ENCHANT: false
+
+FURNACE-RECIPE:
+  ENABLE: true
+  ITEM:
+    NAME: "&7带鱼 - 已烹饪"
+    MATERIAL: COOKED_COD
+    URL-HEAD: ""
+    DATA: 0
+    AMOUNT: 1
+    LORE:
+      - "&8&m----------------------------"
+      - "&b&l基础信息:"
+      - " &e名称&7: &7带鱼"
+      - " &e稀有度&7: &6★&7☆☆☆☆"
+      - " &6钓手&7: &6<owner>"
+      - " "
+      - "&b&l描述:"
+      - " &7烹饪了之后，感觉没有闻起来那么腥了..."
+      - "&8&m----------------------------"
+    ENCHANT:
+      - ""
+
+  # 食用后的效果
+  EFFECTS:
+    - ""
+
+  TITLE:
+    MAIN-TITLE: "&7嗯..."
+    SUB-TITLE: "&e味道浓郁..."
+    FADE-IN: 20
+    FADE-OUT: 20
+    STAY: 20
+
+  COMMANDS:
+    PLAYER:
+      - ""
+    CONSOLE:
+      - ""
+
+  ANNOUNCEMENT:
+    - ""
+
+  MESSAGE:
+    - "&7[我] &7嗯... &e味道浓郁..."
+
+  PARTICLE:
+    - "CAMPFIRE_COSY_SMOKE;1;1;1;50;ONLINE;FALSE"
+
+  SOUNDS:
+    - "ENTITY_IRON_GOLEM_DAMAGE;1;1"
+
+  HEALTH: 3
+  HUNGER: 4
+  EXP: 0
+
+  ACTION-BAR:
+    TIME: 0
+    MESSAGE: ""
+  BOSS-BAR:
+    TIME: 0
+    MESSAGE: ""
+    COLOR: RANDOM
+    STYLE: RANDOM
+
+USE-FURNACE:
+  CAN-BUILD: false
+  CAN-CRAFT: false
+  CAN-COMBUSTION: false
+  CAN-ANVIL: false
+  CAN-ENCHANT: false
+
+BAIT:
+  SPECIFIC:
+    - ""
+    - ""
+
+  AVAILABLE:
+    - ""
+    - ""
+
+BIOME:
+  SPECIFIC:
+    - ""
+    - ""
+
+  AVAILABLE:
+    - ""
+    - ""
+
+AREA:
+  SPECIFIC:
+    - ""
+    - ""
+
+  AVAILABLE:
+    - ""
+    - ""
+
+BBA:
+  - ""
+
+FISH-MATCH: 7
+FISH-MATCH-CAUGHT:
+  TITLE:
+    MAIN-TITLE: "&7带鱼!"
+    SUB-TITLE: "&e恭喜您，您增加了 7 点积分!"
+    FADE-IN: 20
+    FADE-OUT: 20
+    STAY: 20
+  PARTICLE:
+    - ""
+  SOUNDS:
+    - "ENTITY_PLAYER_LEVELUP;1;1"
+  COMMANDS:
+    PLAYER:
+      - ""
+    CONSOLE:
+      - ""
+  MESSAGE:
+    - "&7[&6&l钓鱼助手&7] &e恭喜您! 您钓到了: &7带鱼&e! 您增加了 &67 &e点积分! 您目前的积分为: &6<nowinteger>"
+  ANNOUNCEMENT:
+    - ""
+  EFFECTS:
+    - ""
+  HEALTH: 0.0
+  HUNGER: 0
+  EXP: 0
+  ACTION-BAR:
+    TIME: 0
+    MESSAGE: ""
+  BOSS-BAR:
+    TIME: 0
+    MESSAGE: ""
+    COLOR: RANDOM
+    STYLE: RANDOM
+  REMOVE-DROP-EXP: true

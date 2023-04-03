@@ -1,0 +1,542 @@
+# 注: 在 0.0.9 版本后已取消 ENABLE/SHOW 这种无用设置，若想关闭请直接设置为 ""
+#
+# 自动重载: 由于 Advanced Fish 会把一些热数据存储到内存中，所以部分配置是无法被 自动重载 的
+# 就算配置文件内的更改被应用，但是内存中的热数据并不会跟随同步，这将意味着会有数据不同步的问题
+# 因此如果您的更改涉及到了以下这些，则必须手动重载插件，使用指令 玩家 - /af reload 控制台 - afc reload
+#
+# 除 FURNACE-RECIPE.ENABLE / USE / USE-FURNACE / 物品名称 / 鱼饵增幅 以外，其余配置是可以被 自动重载 的，这将意味着您可以无需重载插件，修改后保存即刻应用
+#
+# 您可以查看wiki以获得最基础的教程: https://gitee.com/A2000000/advanced-fish/wikis
+ITEM:
+  # 名字
+  NAME: "&7鲫鱼"
+  # 物品
+  MATERIAL: COD
+  #
+  # 此物品是否是头颅?
+  # 如果是的话那么请在此输入您需要自定义的头颅 URL 链接 一旦填写则会自动生成此 URL 的头颅，并忽略 MATERIAL 内所规定的物品
+  # 如果您只是想要怪物头颅，且这是原版可以获得的 那么请不要在此填写 URL 而是使用物品 DATA 以及 MATERIAL
+  # 如果不是那么请不要填写任何东西
+  # 如 http://textures.minecraft.net/texture/3bb612eb495ede2c5ca5178d2d1ecf1ca5a255d25dfc3c254bc47f6848791d8
+  #
+  # 您可以去 https://minecraft-heads.com/player-heads/submit 这里获得指定玩家的头像 URL
+  # 您可以去 https://minecraft-heads.com/player-heads 这里获得各种有趣的头像 URL
+  #
+  # https://minecraft-heads.com/player-heads/food-drinks 这里是各种食物的 URL
+  #
+  # 如果不用请留空而不是留空格或者是各种乱七八糟的东西
+  #
+  URL-HEAD: ""
+  # 物品 Data
+  DATA: 0
+  # 一次性钓上来的数量
+  AMOUNT: 1
+  # 描述
+  # 使用 <owner> 作为钓手名
+  LORE:
+    - "&8&m----------------------------"
+    - "&b&l基础信息:"
+    - " &e名称&7: &7鲫鱼"
+    - " &e稀有度&7: &7☆☆☆☆☆"
+    - " &6钓手&7: &6<owner>"
+    - " "
+    - "&b&l描述:"
+    - " &7这似乎是很常见的鱼类... &e烹饪后似乎比较美味&7..."
+    - " "
+    - "&8&l尘封的描述:"
+    - " &8&o此鱼似乎没有任何特殊之处..."
+    - "&8&m----------------------------"
+  # 物品的附魔
+  ENCHANT:
+    - ""
+  # 钓上此鱼的几率 (前提是必须满足钓上的条件) (在 0.0.7-SNAPSHOT 中几率已经没有规定的数值范围，不过必须是整数)
+  PROBABILITY: 80
+
+  # 能钓上此鱼的条件
+  CONDITION:
+    # 玩家背包含有什么才可以钓到
+    # 物品;数量
+    INVENTORY-HAVE:
+      - ""
+    # 玩家的鱼竿需要含有什么附魔
+    # 附魔名;等级
+    # 此等级为大于等于，若只是拥有即可的话那么就设置为0
+    ROD-HAVE-ENCHANT:
+      - ""
+    # 玩家自身是否需要含有什么药水效果
+    # 药水效果;等级
+    # 此等级为大于等于，若只是拥有即可的话那么就设置为0
+    PLAYER-HAVE-EFFECTS:
+      - ""
+    # 玩家钓到此鱼需要达到多少的经验值
+    LEVEL: 0
+
+  CAUGHT:
+    # 钓上此鱼是否显示标题? 以及在此自定义标题的内容
+    TITLE:
+      # 主标题
+      MAIN-TITLE: "&7鲫鱼!"
+      # 副标题
+      SUB-TITLE: "&e烹饪后似乎比较美味..."
+      # 标题淡入 ticks - 20ticks = 1s
+      FADE-IN: 20
+      # 标题淡出 ticks
+      FADE-OUT: 20
+      # 标题持续 ticks
+      STAY: 20
+
+    #
+    # 当玩家钓到此鱼后，给玩家显示什么粒子效果?
+    #
+    # 此部分语法较为特殊，请仔细阅读
+    # 格式: 粒子效果;偏移量X;偏移量Y;偏移量Z;显示的粒子数量;为哪些玩家显示;粒子颜色
+    #
+    # 需要注意的是，偏移量必须填写，若不填写这将意味着所有粒子都位于一个点
+    # 玩家显示有: PLAYER / ONLINE 前者是只为钓手显示，后者是为全服玩家显示 (当然只有周围玩家可以看见)
+    #
+    # 粒子颜色并非所有粒子都可以自定义，此处需要填写的是 java awr color, 您可以去这里查看颜色列表: https://docs.oracle.com/javase/7/docs/api/java/awt/Color.html
+    #
+    # 粒子颜色还有需要注意的，即如果您使用的是音符 (NOTE) 那么则不支持自定义颜色
+    # 因为音符如果自定义颜色，则会导致 offset 偏移失效，全部粒子都在一个点上，所以音符为随机颜色
+    #
+    # 如果您不想要颜色则填写 FALSE 如: "FLAME;1;1;1;50;PLAYER;FALSE"
+    # 这对于大小写并不敏感，您甚至可以这样写，并不会有问题: FaLsE
+    #
+    PARTICLE:
+      - ""
+
+    # 当玩家钓上此鱼后的音效
+    # 格式: 音效;音量;音高
+    SOUNDS:
+      - "ENTITY_PLAYER_LEVELUP;1;1"
+
+    # 当玩家钓到此鱼了以玩家身份执行什么指令
+    # 或者需要控制台执行什么指令
+    #
+    # 您可以使用此功能为玩家制作钓鱼奖励。
+    # 使用 <player> 作为玩家名
+    COMMANDS:
+      PLAYER:
+        - ""
+      CONSOLE:
+        - ""
+
+    # 当玩家钓到此鱼之后，给玩家发送一些消息?
+    MESSAGE:
+      - "&7[&6&l钓鱼助手&7] &e恭喜您! 您钓到了: &7鲫鱼&e!"
+
+    # 当玩家钓到此鱼之后，给全服的玩家发送一条提示消息?
+    ANNOUNCEMENT:
+      - ""
+
+    # 当玩家钓到此鱼之后，给此玩家药水效果?
+    EFFECTS:
+      - ""
+
+    # 当玩家钓到此鱼后，给玩家回复多少血量和饱食度?  0~20
+    HEALTH: 0.0
+    HUNGER: 0
+
+    # 当玩家钓到此鱼后，给予多少经验值
+    # 只能整数
+    EXP: 0
+
+    # 是否取消此物品本身掉落的经验，而转用上面所填写的经验
+    REMOVE-DROP-EXP: true
+
+  # 当鱼咬钩的时候
+  BITE:
+    # 默认给予玩家缓慢与失明的效果让钓鱼视角看起来更加好看
+    EFFECTS:
+      - "slow;20;5"
+      - "blindness;40;5"
+    TITLE:
+      MAIN-TITLE: "&c咬钩!"
+      SUB-TITLE: "&a趁着这个机会，尽快拉钓!"
+      FADE-IN: 20
+      FADE-OUT: 20
+      STAY: 20
+    COMMANDS:
+      PLAYER:
+        - ""
+      CONSOLE:
+        - ""
+    ANNOUNCEMENT:
+      - ""
+    MESSAGE:
+      - "&7[&6&l钓鱼助手&7] &c咬钩! 趁着这个机会，赶快拉钩!"
+    PARTICLE:
+      - "FLAME;1;1;1;50;PLAYER;FALSE"
+    SOUNDS:
+      - "BLOCK_CHEST_OPEN;1;1"
+    HEALTH: 0
+    HUNGER: 0
+    # 只能整数
+    EXP: 0
+    ACTION-BAR:
+      TIME: 0
+      MESSAGE: ""
+    BOSS-BAR:
+      TIME: 0
+      MESSAGE: ""
+      COLOR: RANDOM
+      STYLE: RANDOM
+
+  # 当鱼没有上钩 悲
+  FAILED:
+    EFFECTS:
+      - "slow;20;5"
+      - "blindness;40;5"
+    TITLE:
+      MAIN-TITLE: "&7空军..!"
+      SUB-TITLE: "&a继续... 钓鱼佬永不空军!"
+      FADE-IN: 20
+      FADE-OUT: 20
+      STAY: 20
+    COMMANDS:
+      PLAYER:
+        - ""
+      CONSOLE:
+        - ""
+    ANNOUNCEMENT:
+      - ""
+    MESSAGE:
+      - "&7[&6&l钓鱼助手&7] &7空军... &a继续... 钓鱼佬永不空军!"
+    PARTICLE:
+      - "FLAME;1;1;1;50;PLAYER;FALSE"
+    SOUNDS:
+      - "ENTITY_IRON_GOLEM_DAMAGE;1;1"
+
+    HEALTH: 0
+    HUNGER: 0
+    # 只能整数
+    EXP: 0
+    ACTION-BAR:
+      TIME: 0
+      MESSAGE: ""
+    BOSS-BAR:
+      TIME: 0
+      MESSAGE: ""
+      COLOR: RANDOM
+      STYLE: RANDOM
+
+# 食用设置
+EATING:
+  # 设置此鱼食用后是否具有增益
+  # 如果为光的话，则此鱼可以食用，但是不会有任何增益
+  CAN-EAT: true
+
+  # 玩家食用后是否为其添加药水效果
+  EFFECTS:
+    - "confusion;200;20"
+
+  # 玩家食用后是否发送一个标题给玩家
+  TITLE:
+    MAIN-TITLE: "&c生吃鲫鱼..."
+    SUB-TITLE: "&7其实... 也没那么不堪..."
+    FADE-IN: 20
+    FADE-OUT: 20
+    STAY: 20
+
+  # 玩家食用过后是否让玩家或者控制台执行指令
+  # (为勇敢玩家给予奖励 雾)
+  COMMANDS:
+    PLAYER:
+      - ""
+    CONSOLE:
+      - ""
+
+  # 食用后是否发送全服公告
+  ANNOUNCEMENT:
+    - ""
+
+  # 食用后是否给玩家发送信息
+  MESSAGE:
+    - "&7[我] &c生吃鲫鱼... &7其实... 也没那么不堪..."
+
+  # 食用后是否显示粒子效果
+  PARTICLE:
+    - "FLAME;1;1;1;50;PLAYER;FALSE"
+
+  # 食用后是否给玩家发送音效
+  SOUNDS:
+    - "ENTITY_IRON_GOLEM_DAMAGE;1;1"
+
+  # 为玩家回多少血? 0~20
+  HEALTH: 1
+
+  # 为玩家恢复多少饥饿度？ 0~20 (如果玩家吃的这个鱼的物品，那么则是恢复的总和是 此食物本身可以恢复的 + 下面的数值)
+  HUNGER: 2
+
+  # 为玩家添加多少的经验值
+  # 只能整数
+  EXP: 0
+
+  ACTION-BAR:
+    TIME: 0
+    MESSAGE: ""
+
+  BOSS-BAR:
+    TIME: 0
+    MESSAGE: ""
+    COLOR: RANDOM
+    STYLE: RANDOM
+
+# 当玩家以各种形式使用这个物品
+# 注: 如果您让玩家钓上来的并非什么可用的物品，而是一些普通的方块，或者附魔书，则请开启里面所有选项
+USE:
+  # 如果此鱼的物品不是食物，我们是否 允许 玩家放置此鱼到地上去
+  # 强调 是允许，即开启后 玩家可以放置
+  CAN-BUILD: false
+
+  # 是否允许此物品像原版物品一样被玩家合成或分解
+  CAN-CRAFT: false
+
+  # 是否允许此物品在熔炉里面被燃烧 (无论是做燃料还是什么，若关闭则会直接取消玩家在熔炉界面点击此物品的操作)
+  CAN-COMBUSTION: true
+
+  # 是否允许此物品与铁砧交互
+  CAN-ANVIL: false
+
+  # 是否允许此物品在附魔台被附魔
+  CAN-ENCHANT: false
+
+# 熔炉食谱自定义
+# 注意，只有此鱼的原型为可煅烧物品，才可以被熔炉煅烧
+# 否则此选项将无效，只能通过上面的选项选择直接吃钓上来的
+#
+# 开启此选项请同时开启 CAN-COMBUSTION
+FURNACE-RECIPE:
+  # 开启自定义食谱
+  # 此处的 ENABLE 依然有效
+  ENABLE: true
+  # 正常熔炉煅烧所得产物
+  ITEM:
+    NAME: "&7鲫鱼 - 已烹饪"
+    MATERIAL: COOKED_COD
+    URL-HEAD: ""
+    DATA: 0
+    AMOUNT: 1
+    LORE:
+      - "&8&m----------------------------"
+      - "&b&l基础信息:"
+      - " &e名称&7: &7鲫鱼"
+      - " &e稀有度&7: &6★&7☆☆☆☆"
+      - " &6钓手&7: &6<owner>"
+      - " "
+      - "&b&l描述:"
+      - " &7这似乎是很常见的鱼类... 经过烹饪，闻起来没什么腥味..."
+      - "&8&m----------------------------"
+    ENCHANT:
+      - ""
+
+  # 食用后的效果
+  EFFECTS:
+    - ""
+
+  TITLE:
+    MAIN-TITLE: "&7嗯..."
+    SUB-TITLE: "&e肉质松软，还不错?"
+    FADE-IN: 20
+    FADE-OUT: 20
+    STAY: 20
+
+  COMMANDS:
+    PLAYER:
+      - ""
+    CONSOLE:
+      - ""
+
+  ANNOUNCEMENT:
+    - ""
+
+  MESSAGE:
+    - "&7[我] &7嗯... &e肉质松软，还不错?"
+
+  PARTICLE:
+    - "CAMPFIRE_COSY_SMOKE;1;1;1;50;ONLINE;FALSE"
+
+  SOUNDS:
+    - "ENTITY_IRON_GOLEM_DAMAGE;1;1"
+
+  HEALTH: 2
+  HUNGER: 5
+  # 只能整数
+  EXP: 0
+
+  ACTION-BAR:
+    TIME: 0
+    MESSAGE: ""
+
+  BOSS-BAR:
+    TIME: 0
+    MESSAGE: ""
+    COLOR: RANDOM
+    STYLE: RANDOM
+
+# 与上面类似，此项主要管理烹饪后的鱼是否可以被使用
+USE-FURNACE:
+  CAN-BUILD: false
+  CAN-CRAFT: false
+  CAN-COMBUSTION: false
+  CAN-ANVIL: false
+  CAN-ENCHANT: false
+
+# 鱼饵设置
+# 若不想规定，则全部设为 ""
+BAIT:
+  # 锁定鱼饵，即只有以下规定的鱼饵才可以钓此鱼
+  # 格式: 鱼饵名;增加的几率 (如果您不想增加，则写 0)
+  # 注: 增加的几率可以自行定义，在 0.0.7-SNAPSHOT 中几率已经没有规定的数值范围，不过必须是整数
+  #
+  # 特别注意: 此项与第二项并不兼容，这将意味着您如果要使用第二项，则第一项必须为空，若使用第一项，第二项必须为空，否则会出现概率计算问题
+  SPECIFIC:
+    - ""
+    - ""
+
+  # 可用鱼饵，即如果使用了以下的鱼饵，可以增高多少的钓上此鱼的几率
+  # 格式: 鱼饵名;增加的几率 (如果您不想增加，则写 0)
+  # 注: 增加的几率可以自行定义，在 0.0.7-SNAPSHOT 中几率已经没有规定的数值范围，不过必须是整数
+  #
+  # 这一项与 SPECIFIC 有什么区别? SPECIFIC 为如果不使用其规定的鱼饵，则此鱼钓到的可能性为0 此项为，就算不用规定的鱼饵，钓到此鱼的概率依然是上面 (PROBABILITY) 所规定的
+  AVAILABLE:
+    - ""
+    - ""
+
+# 生物群系规定 其大体配置与 BAIT 项差不多，请阅读 BAIT 项注释后配置此项
+BIOME:
+  # 格式: 生物群系;增加的几率 (如果您不想增加，则写 0)
+  #
+  # 特别注意: 此项与第二项并不兼容，这将意味着您如果要使用第二项，则第一项必须为空，若使用第一项，第二项必须为空，否则会出现概率计算问题
+  SPECIFIC:
+    - ""
+    - ""
+
+  # 格式: 生物群系;增加的几率 (如果您不想增加，则写 0)
+  AVAILABLE:
+    - ""
+    - ""
+
+# 在特定鱼域内增高多少的钓上此鱼的几率 或什么鱼域才可以钓到特定的鱼
+AREA:
+  # 格式: 鱼域文件名;增加的几率 (如果您不想增加，则写 0)
+  SPECIFIC:
+    - ""
+    - ""
+
+  # 格式: 鱼域文件名;增加的几率 (如果您不想增加，则写 0)
+  AVAILABLE:
+    - ""
+    - ""
+
+# 同时满足硬性条件的列表 (BAIT / BIOME / AREA) 大小写不敏感
+# 若要使用此功能则必须要有两个以上的硬性限制，大概如下:
+# 当我使用了 BAIT 和 BIOME 的 SPECIFIC, 我希望这两个条件必须同时满足，此鱼才能够被钓到，那么请在此填入 BAIT 与 BIOME
+#  - "BAIT"
+#  - "BIOME"
+BBA:
+  - ""
+
+# 钓鱼比赛设置
+# 如果玩家在钓鱼比赛内钓到这条鱼，添加多少的积分 (可以是小数)
+FISH-MATCH: 5
+# 当玩家在钓鱼比赛钓到了这一条鱼 则显示这里的内容，而不会显示 CAUGHT 内的内容
+FISH-MATCH-CAUGHT:
+  TITLE:
+    MAIN-TITLE: "&7鲫鱼!"
+    SUB-TITLE: "&e恭喜您，您增加了 5 点积分!"
+    FADE-IN: 20
+    FADE-OUT: 20
+    STAY: 20
+  PARTICLE:
+    - ""
+  SOUNDS:
+    - "ENTITY_PLAYER_LEVELUP;1;1"
+  COMMANDS:
+    PLAYER:
+      - ""
+    CONSOLE:
+      - ""
+  MESSAGE:
+    - "&7[&6&l钓鱼助手&7] &e恭喜您! 您钓到了: &7鲫鱼&e! 您增加了 &65 &e点积分! 您目前的积分为: &6<nowinteger>"
+  ANNOUNCEMENT:
+    - ""
+  EFFECTS:
+    - ""
+  HEALTH: 0.0
+  HUNGER: 0
+  EXP: 0
+  REMOVE-DROP-EXP: true
+  ACTION-BAR:
+    TIME: 0
+    MESSAGE: ""
+  BOSS-BAR:
+    TIME: 0
+    MESSAGE: ""
+    COLOR: RANDOM
+    STYLE: RANDOM
+
+# 生物群系列表 (1.19)
+# OCEAN
+# PLAINS
+# DESERT
+# WINDSWEPT_HILLS
+# FOREST
+# TAIGA
+# SWAMP
+# MANGROVE_SWAMP
+# RIVER
+# NETHER_WASTES
+# THE_END
+# FROZEN_OCEAN
+# FROZEN_RIVER
+# SNOWY_PLAINS
+# MUSHROOM_FIELDS
+# BEACH
+# JUNGLE
+# SPARSE_JUNGLE
+# DEEP_OCEAN
+# STONY_SHORE
+# SNOWY_BEACH
+# BIRCH_FOREST
+# DARK_FOREST
+# SNOWY_TAIGA
+# OLD_GROWTH_PINE_TAIGA
+# WINDSWEPT_FOREST
+# SAVANNA
+# SAVANNA_PLATEAU
+# BADLANDS
+# WOODED_BADLANDS
+# SMALL_END_ISLANDS
+# END_MIDLANDS
+# END_HIGHLANDS
+# END_BARRENS
+# WARM_OCEAN
+# LUKEWARM_OCEAN
+# COLD_OCEAN
+# DEEP_LUKEWARM_OCEAN
+# DEEP_COLD_OCEAN
+# DEEP_FROZEN_OCEAN
+# THE_VOID
+# SUNFLOWER_PLAINS
+# WINDSWEPT_GRAVELLY_HILLS
+# FLOWER_FOREST
+# ICE_SPIKES
+# OLD_GROWTH_BIRCH_FOREST
+# OLD_GROWTH_SPRUCE_TAIGA
+# WINDSWEPT_SAVANNA
+# ERODED_BADLANDS
+# BAMBOO_JUNGLE
+# SOUL_SAND_VALLEY
+# CRIMSON_FOREST
+# WARPED_FOREST
+# BASALT_DELTAS
+# DRIPSTONE_CAVES
+# LUSH_CAVES
+# DEEP_DARK
+# MEADOW
+# GROVE
+# SNOWY_SLOPES
+# FROZEN_PEAKS
+# JAGGED_PEAKS
+# STONY_PEAKS

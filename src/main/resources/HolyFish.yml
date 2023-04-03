@@ -1,0 +1,332 @@
+ITEM:
+  NAME: "&6圣鱼"
+  MATERIAL: COD
+  URL-HEAD: ""
+  DATA: 0
+  AMOUNT: 1
+  LORE:
+    - "&8&m----------------------------"
+    - "&b&l基础信息:"
+    - " &e名称&7: &6圣鱼"
+    - " &e稀有度&7: &6★★★★★"
+    - " &6钓手&7: &6<owner>"
+    - " "
+    - "&b&l描述:"
+    - " &e这似乎是整个大陆上最稀有的鱼类之一"
+    - " &e全身散发着圣洁的光芒... 看起来很难被钓到..."
+    - " "
+    - "&8&l尘封的描述:"
+    - " &8&o这条鱼... 太过于神秘... 关于它的资料无从考究..."
+    - "&8&m----------------------------"
+  ENCHANT:
+    - "vanishing_curse;1"
+  PROBABILITY: 10
+
+  CONDITION:
+    INVENTORY-HAVE:
+      - "NETHERITE_SWORD;1"
+      - "TURTLE_HELMET;1"
+      - "GOLDEN_APPLE;1"
+    ROD-HAVE-ENCHANT:
+      - "luck_of_the_sea;3"
+      - "lure;3"
+    PLAYER-HAVE-EFFECTS:
+      - ""
+    LEVEL: 30
+
+  CAUGHT:
+    TITLE:
+      MAIN-TITLE: "&6圣鱼!"
+      SUB-TITLE: "&6这... 浑身散发着圣洁的光芒..!"
+      FADE-IN: 20
+      FADE-OUT: 20
+      STAY: 20
+
+    PARTICLE:
+      - ""
+
+    SOUNDS:
+      - "ENTITY_PLAYER_LEVELUP;5;1"
+
+    COMMANDS:
+      PLAYER:
+        - ""
+      CONSOLE:
+        - ""
+
+    MESSAGE:
+      - "&7[我] &6唔... 感觉身体... 已经恢复到巅峰状态了..."
+      - "&7[&6&l钓鱼助手&7] &e恭喜您! 您钓到了: &6圣鱼&e! 并获得了 &6圣鱼的祝福&e!"
+
+    ANNOUNCEMENT:
+      - "&7[&d服务器娘&7] &a<player> &7钓到了一条 &6圣鱼! &7让我们祝 TA 寿比南山..."
+
+    EFFECTS:
+      - ""
+
+    HEALTH: 20
+    HUNGER: 20
+    EXP: 200
+
+    ACTION-BAR:
+      TIME: 0
+      MESSAGE: ""
+    BOSS-BAR:
+      TIME: 0
+      MESSAGE: ""
+      COLOR: RANDOM
+      STYLE: RANDOM
+
+    REMOVE-DROP-EXP: true
+
+  BITE:
+    EFFECTS:
+      - "slow;20;5"
+      - "blindness;40;5"
+    TITLE:
+      MAIN-TITLE: "&c咬钩!"
+      SUB-TITLE: "&a趁着这个机会，尽快拉钓!"
+      FADE-IN: 20
+      FADE-OUT: 20
+      STAY: 20
+    COMMANDS:
+      PLAYER:
+        - ""
+      CONSOLE:
+        - ""
+    ANNOUNCEMENT:
+      - ""
+    MESSAGE:
+      - "&7[&6&l钓鱼助手&7] &6咬钩! &a趁着这个机会，赶快拉钩! &6这条鱼... 全身散发着光芒..."
+    PARTICLE:
+      - "FLAME;1;1;1;50;PLAYER;FALSE"
+    SOUNDS:
+      - "BLOCK_CHEST_OPEN;1;1"
+    HEALTH: 0
+    HUNGER: 0
+    EXP: 0
+    ACTION-BAR:
+      TIME: 0
+      MESSAGE: ""
+    BOSS-BAR:
+      TIME: 0
+      MESSAGE: ""
+      COLOR: RANDOM
+      STYLE: RANDOM
+
+  FAILED:
+    EFFECTS:
+      - "slow;20;5"
+      - "blindness;40;5"
+    TITLE:
+      MAIN-TITLE: "&7空军..!"
+      SUB-TITLE: "&a刚才似乎错过了一条很稀有的鱼..."
+      FADE-IN: 20
+      FADE-OUT: 20
+      STAY: 20
+    COMMANDS:
+      PLAYER:
+        - ""
+      CONSOLE:
+        - ""
+    ANNOUNCEMENT:
+      - ""
+    MESSAGE:
+      - "&7[&6&l钓鱼助手&7] &7刚才似乎错过了一条很稀有的鱼..."
+    PARTICLE:
+      - "FLAME;1;1;1;50;PLAYER;FALSE"
+    SOUNDS:
+      - "ENTITY_IRON_GOLEM_DAMAGE;1;1"
+
+    HEALTH: 0
+    HUNGER: 0
+    EXP: 0
+
+    ACTION-BAR:
+      TIME: 0
+      MESSAGE: ""
+    BOSS-BAR:
+      TIME: 0
+      MESSAGE: ""
+      COLOR: RANDOM
+      STYLE: RANDOM
+
+EATING:
+  CAN-EAT: true
+
+  EFFECTS:
+    - "INCREASE_DAMAGE;600;2"
+
+  TITLE:
+    MAIN-TITLE: "&6美味..!"
+    SUB-TITLE: "&7这太好吃了... 全身都散发着光..."
+    FADE-IN: 20
+    FADE-OUT: 20
+    STAY: 20
+
+  COMMANDS:
+    PLAYER:
+      - ""
+    CONSOLE:
+      - ""
+
+  ANNOUNCEMENT:
+    - ""
+
+  MESSAGE:
+    - ""
+
+  PARTICLE:
+    - "FLAME;1;1;1;50;PLAYER;FALSE"
+
+  SOUNDS:
+    - "ENTITY_IRON_GOLEM_DAMAGE;1;1"
+
+  HEALTH: 20
+  HUNGER: 20
+  EXP: 0
+
+  ACTION-BAR:
+    TIME: 0
+    MESSAGE: ""
+  BOSS-BAR:
+    TIME: 0
+    MESSAGE: ""
+    COLOR: RANDOM
+    STYLE: RANDOM
+
+USE:
+  CAN-BUILD: false
+  CAN-CRAFT: false
+  CAN-COMBUSTION: true
+  CAN-ANVIL: false
+  CAN-ENCHANT: false
+
+FURNACE-RECIPE:
+  ENABLE: false
+  ITEM:
+    NAME: ""
+    MATERIAL: ""
+    URL-HEAD: ""
+    DATA: 0
+    AMOUNT: 0
+    LORE:
+      - ""
+    ENCHANT:
+      - ""
+
+  # 食用后的效果
+  EFFECTS:
+    - ""
+
+  TITLE:
+    MAIN-TITLE: ""
+    SUB-TITLE: ""
+    FADE-IN: 20
+    FADE-OUT: 20
+    STAY: 20
+
+  COMMANDS:
+    PLAYER:
+      - ""
+    CONSOLE:
+      - ""
+
+  ANNOUNCEMENT:
+    - ""
+
+  MESSAGE:
+    - ""
+
+  PARTICLE:
+    - ""
+
+  SOUNDS:
+    - ""
+
+  HEALTH: 0
+  HUNGER: 0
+  EXP: 0
+
+  ACTION-BAR:
+    TIME: 0
+    MESSAGE: ""
+  BOSS-BAR:
+    TIME: 0
+    MESSAGE: ""
+    COLOR: RANDOM
+    STYLE: RANDOM
+
+USE-FURNACE:
+  CAN-BUILD: false
+  CAN-CRAFT: false
+  CAN-COMBUSTION: false
+  CAN-ANVIL: false
+  CAN-ENCHANT: false
+
+BAIT:
+  SPECIFIC:
+    - ""
+    - ""
+
+  AVAILABLE:
+    - ""
+    - ""
+
+BIOME:
+  SPECIFIC:
+    - ""
+    - ""
+
+  AVAILABLE:
+    - ""
+    - ""
+
+AREA:
+  SPECIFIC:
+    - ""
+    - ""
+
+  AVAILABLE:
+    - ""
+    - ""
+
+BBA:
+  - ""
+
+FISH-MATCH: 20
+FISH-MATCH-CAUGHT:
+  TITLE:
+    MAIN-TITLE: "&6圣鱼!"
+    SUB-TITLE: "&e恭喜您，您增加了 20 点积分!"
+    FADE-IN: 20
+    FADE-OUT: 20
+    STAY: 20
+  PARTICLE:
+    - ""
+  SOUNDS:
+    - "ENTITY_PLAYER_LEVELUP;5;1"
+  COMMANDS:
+    PLAYER:
+      - ""
+    CONSOLE:
+      - ""
+  MESSAGE:
+    - "&7[我] &6唔... 感觉身体... 已经恢复到巅峰状态了..."
+    - "&7[&6&l钓鱼助手&7] &e恭喜您! 您钓到了: &6圣鱼&e! 获得了 &6圣鱼的祝福&e! 并增加了 &620 &e点积分! 您目前的积分为: &6<nowinteger>"
+  ANNOUNCEMENT:
+    - "&7[&d服务器娘&7] &a<player> &7钓到了一条 &6圣鱼! &7让我们祝 TA 寿比南山..."
+  EFFECTS:
+    - ""
+  HEALTH: 20
+  HUNGER: 20
+  EXP: 200
+  ACTION-BAR:
+    TIME: 0
+    MESSAGE: ""
+  BOSS-BAR:
+    TIME: 0
+    MESSAGE: ""
+    COLOR: RANDOM
+    STYLE: RANDOM
+  REMOVE-DROP-EXP: true

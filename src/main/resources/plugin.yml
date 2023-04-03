@@ -1,0 +1,27 @@
+name: AdvancedFish
+version: '${project.version}'
+main: me.twomillions.plugin.advancedfish.main
+api-version: 1.13
+authors: [ TwoMillions ]
+description: 一个高度自定义的高级钓鱼插件，高级钓鱼，不止是钓鱼!
+commands:
+  advancedfish:
+    aliases: [ af ]
+    description: 提示指令.
+  area:
+    description: 鱼域设置指令。
+  getenchantment:
+    description: 辅助指令，获取玩家手上物品的附魔。
+  getpotioneffect:
+    description: 辅助指令，获取玩家手上药水的效果名。
+  getbiome:
+    description: 辅助指令，获取玩家所在的生物群系。
+  getmaterial:
+    description: 辅助指令，获取玩家手上物品的类型名称。
+  fishmatch:
+    description: 钓鱼比赛指令。
+  advancedconsole:
+    aliases: [ afc ]
+    description: 控制台指令。
+  census:
+    description: 获取钓鱼比赛统计Gui.

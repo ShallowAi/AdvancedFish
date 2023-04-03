@@ -1,0 +1,68 @@
+# 您可以查看wiki以获得最基础的教程: https://gitee.com/A2000000/advanced-fish/wikis# 注册的鱼类
+#
+# 警告: 您至少需要 一个 没有任何限制的鱼类来保证随机系统不会出错
+#
+# 我这里提供了一个完整的没有任何限制即可钓上来的鱼的鱼类配置文件 - Carassius (鲫鱼)
+# 只要您通读它，您便可以很容易的创建出专属于您的鱼类 (内含详细注释)
+#
+# 我这里还提供了一个没有任何注释的简洁配置文件 - Hairtail (带鱼)
+# 当您熟练后，使用没有注释的配置文件会更加快速
+#
+# 我这里还提供了一个完整的原版非鱼物品的简洁配置文件 - HolyFish (圣鱼)
+#
+# 这三个配置将有助于您精通此插件，别担心，这很简单
+#
+# 自动重载: 详情请查看 Carassius示例 头部注释。
+#
+# 温馨提示，此插件支持使用 Yum Plugman 等插件热重载
+FISH:
+  - "Carassius"
+  - "Hairtail"
+  - "HolyFish"
+
+# 注册的鱼饵
+# 我这里只提供了一个作为参考，其配置文件与鱼类差不多
+#
+# 自动重载: 详情请查看 BasicBait示例 头部注释。
+BAIT:
+  - "BasicBait"
+
+# 注册的鱼域
+#
+# 注意: 此文件存储方式为 json
+# 作为 人类 ，您很难完全看懂 json, 且您很难手动编写 json 而不出错
+# 反正我不建议您手动敲坐标，鱼类等，起码作为一个 正常的人类 ，这很难
+# 请您使用 /area 在游戏内进行手动编辑，但是关于鱼域所增加的几率请在 鱼类文件 内进行编辑
+#
+# 注意: 当您使用 /area 指令对鱼域进行注册或删除后此文件注释便会重置 (只有这个文件)
+#
+# 自动重载: Area 一切配置均会在修改后自动进行重载并即刻应用，无需手动。
+AREA:
+  - ""
+
+# 自定义指令权限
+ENCHANTMENT-PERM: "cf.command.ench"
+POTION-EFFECT-PERM: "cf.command.potion"
+BIOME-PERM: "cf.command.biome"
+MATERIAL-PERM: "cf.command.material"
+# 钓鱼比赛
+FISH-MATCH-HOLD: "cf.command.fishmatch.hold"
+FISH-MATCH-SET: "cf.command.fishmatch.set"
+
+ADMIN-PERM: "cf.admin"
+
+# 是否统计信息
+# https://bstats.org/plugin/bukkit/AdvancedFish/16770
+BSTATS: true
+
+# 自动检查是否具有新版本
+UPDATE-CHECKER: true
+
+# 检查周期，当自动更新开启后多少分钟进行一次检查
+# (我非常不建议您关闭自动更新检查，真的，根据 bStats 记录来看，在使用稳定的最新版的服务器少之又少，甚至还有在使用最初版本的服务器，这将具有非常大的安全隐患)
+CHECK-CYCLE: 60
+
+# 我们会自动将自定义鱼饵的自定义合成配方添加到玩家的配方书
+# 但是如果您使用了<owner> 则会在配方书内显示为<owner>
+# 在这里设置会避免此问题，更加美观
+BOOK-PLAYER-NAME: "这里是制作玩家的名字!"
