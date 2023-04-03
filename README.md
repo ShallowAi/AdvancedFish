@@ -13,7 +13,7 @@
 > 原Gitee仓库
 - https://gitee.com/A2000000/advanced-fish
 ---
-> 此插件的配置文件较多，您需要自己慢慢阅读，只要您读通配置文件，那么您可以轻而易举地创建出属于您的独一无二的鱼类，您可以通过查看 Wiki 来快速了解插件内容 -> https://github.com/xiaoyueyoqwq/AdvancedFish/wiki/Welcome!
+> 此插件的配置文件较多，您需要自己慢慢阅读，只要您读通配置文件，那么您可以轻而易举地创建出属于您的独一无二的鱼类，您可以通过查看 Wiki 来快速了解插件内容 -> https://github.com/xiaoyueyoqwq/AdvancedFish/wiki/Welcome
 ---
 ## 指令
 > 主要指令
