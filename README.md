@@ -1,5 +1,4 @@
 # 🎣Advanced Fish - 高级钓鱼
-<img arc=“https://img.shields.in/badge/Frame-Hexo-blue”>
 
 ## 此插件原作者已停止维护! <br />此仓库为xiaoyueyoqwq和CBer_SuXuan代理更新！
 
