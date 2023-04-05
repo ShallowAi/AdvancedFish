@@ -1,8 +1,8 @@
 name: AdvancedFish
 version: '${project.version}'
-main: me.twomillions.plugin.advancedfish.main
+main: me.suxuan.advancedfish.main
 api-version: 1.13
-authors: [ TwoMillions ]
+authors: [ TCBer_SuXuan , xiaoyueyoqwq ]
 description: 一个高度自定义的高级钓鱼插件，高级钓鱼，不止是钓鱼!
 commands:
   advancedfish:

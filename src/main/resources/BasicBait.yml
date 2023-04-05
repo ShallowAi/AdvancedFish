@@ -6,7 +6,7 @@
 #
 # 除 USE / CUSTOM-FORMULA / 物品名称 以外，其余配置是可以被 自动重载 的，这将意味着您可以无需重载插件，修改后保存即刻应用
 #
-# 您可以查看wiki以获得最基础的教程: https://gitee.com/A2000000/advanced-fish/wikis
+# 您可以查看wiki以获得最基础的教程: https://github.com/xiaoyueyoqwq/AdvancedFish/wiki/Welcome
 ITEM:
   # 物品规定 其语法与鱼类一样
   # 鱼饵一样可以使用 <owner> 选项设置制作玩家
