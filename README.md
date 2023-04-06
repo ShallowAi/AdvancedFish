@@ -1,5 +1,6 @@
 # 🎣Advanced Fish - 高级钓鱼
-![author](https://img.shields.io/badge/author-CBer__SuXuan%20%26%20xiaoyueyoqwq-blue)
+![code_author](https://img.shields.io/badge/code__author-CBer__SuXuan-orange)
+![wiki_author]((https://img.shields.io/badge/wiki__author-xiaoyueyoqwq-blue)
 
 ## 此插件原作者已停止维护! <br />此仓库为xiaoyueyoqwq和CBer_SuXuan代理更新！
 
