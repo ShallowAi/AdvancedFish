@@ -16,7 +16,6 @@ import org.fusesource.jansi.Ansi;
 import java.util.Arrays;
 
 public final class main extends JavaPlugin {
-    // volatile 防止线程直接共享变量可能会有值更新不可见的问题
     @Getter @Setter private volatile static main instance;
     @Getter @Setter private volatile static Double serverVersion;
 

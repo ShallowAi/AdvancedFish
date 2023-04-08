@@ -29,6 +29,8 @@ ITEM:
   URL-HEAD: ""
   # 物品 Data
   DATA: 0
+  # 物品 CustomModelData， 仅 1.14 以上版本有效
+  MODEL-DATA: 0
   # 一次性钓上来的数量
   AMOUNT: 1
   # 描述

@@ -10,21 +10,21 @@ import org.fusesource.jansi.Ansi;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * author:     2000000
- * project:    AdvancedFish
- * package:        me.twomillions.plugin.advancedfish.commands
- * className:      CensusGuiCommand
- * date:    2022/11/9 21:58
+ * @author: CBer_SuXuan
+ * @project: AdvancedFish
+ * @className: CensusGuiCommand
+ * @date: 2023/4/6 20:38
+ * @description: GUI command
  */
 public class CensusGuiCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        if (!(sender instanceof Player)) {
-            Bukkit.getLogger().warning(Ansi.ansi().fg(Ansi.Color.GREEN).boldOff().toString() + "此指令只有玩家可以使用。");
+        if (!(sender instanceof Player player)) {
+            Bukkit.getLogger().warning(Ansi.ansi().fg(Ansi.Color.GREEN).boldOff().toString()
+                    + "此指令只有玩家可以使用。");
             return false;
         }
 
-        Player player = (Player) sender;
         FishMatchCensusGui.openGui(player);
 
         return true;

@@ -59,6 +59,7 @@ public class PlayerListener implements Listener {
         Item item = (Item) caught;
         ItemStack bait = player.getInventory().getItemInOffHand();
 
+        // Check whether player use bait
         // 鱼饵使用检查
         for (ItemStack allBaitItem : BaitManager.getAllBaitItems()) {
             if (!ItemUtils.checkItemStackSame(allBaitItem, bait)) continue;
@@ -76,49 +77,42 @@ public class PlayerListener implements Listener {
         // 拥有较小的性能提升，虽然不明显
         // 旧版本没有 REEL_IN 这个状态，相同的情况下触发的是 FAILED_ATTEMPT
         switch (state) {
-            case FISHING:
-                PlayerManager.setPlayerFishingStats(player, true);
-                break;
-            case REEL_IN:
-            case IN_GROUND:
-                PlayerManager.setPlayerFishingStats(player, false);
-                break;
-            case BITE:
-                Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
-                    playerFishEventFinalFish = FishManager.getFinalFish(player);
-                    EffectSendManager.sendEffect(playerFishEventFinalFish, player, "Fish", "ITEM.BITE", null, null);
+            case FISHING -> PlayerManager.setPlayerFishingStats(player, true);
+            case REEL_IN, IN_GROUND -> PlayerManager.setPlayerFishingStats(player, false);
+            case BITE -> Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
+                playerFishEventFinalFish = FishManager.getFinalFish(player);
+                EffectSendManager.sendEffect(playerFishEventFinalFish, player, "Fish", "ITEM.BITE", null, null);
 
-                    // 进行判断，如果这个副手物品是鱼饵，并且此鱼饵对此鱼有加成则扣除
-                    BaitManager.getAllBaitItems().forEach(allBaitItem -> {
-                        if (!ItemUtils.checkItemStackSame(allBaitItem, bait)) return;
-                        if (RegisterManager.getFishAndBait().get(playerFishEventFinalFish).contains(BaitManager.baitItemToBaitName(bait))) bait.setAmount(bait.getAmount() - 1);
-                    });
+                // 进行判断，如果这个副手物品是鱼饵，并且此鱼饵对此鱼有加成则扣除
+                BaitManager.getAllBaitItems().forEach(allBaitItem -> {
+                    if (!ItemUtils.checkItemStackSame(allBaitItem, bait)) return;
+                    if (RegisterManager.getFishAndBait().get(playerFishEventFinalFish).contains(BaitManager.baitItemToBaitName(bait)))
+                        bait.setAmount(bait.getAmount() - 1);
                 });
-                break;
-            case FAILED_ATTEMPT:
-                Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> EffectSendManager.sendEffect(playerFishEventFinalFish, player, "Fish", "ITEM.FAILED", null, null));
-                break;
-            case CAUGHT_FISH:
+            });
+            case FAILED_ATTEMPT ->
+                    Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> EffectSendManager.sendEffect(playerFishEventFinalFish, player, "Fish", "ITEM.FAILED", null, null));
+            case CAUGHT_FISH ->
                 // CAUGHT_FISH 并不意味着字面上的鱼 如果钓到一个水瓶 状态仍然是 CAUGHT_FISH
-                Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
-                    if (FishManager.getFishCancelDropExp(playerFishEventFinalFish)) event.setExpToDrop(0);
+                    Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
+                        if (FishManager.getFishCancelDropExp(playerFishEventFinalFish)) event.setExpToDrop(0);
 
-                    ItemStack fishItem = FishManager.getFishItem(playerFishEventFinalFish, player.getName());
+                        ItemStack fishItem = FishManager.getFishItem(playerFishEventFinalFish, player.getName());
 
-                    item.setItemStack(fishItem);
-                    PlayerManager.setPlayerFishingStats(player, false);
+                        item.setItemStack(fishItem);
+                        PlayerManager.setPlayerFishingStats(player, false);
 
-                    // 检查是否在钓鱼比赛并且是否正在进行，如果是的话那么就不用 ITEM.CAUGHT 而是 FISH-MATCH-CAUGHT
-                    if (FishMatchManager.isPlayerInTheFishMatch(player) && FishMatchManager.getFishMatchState() == FishMatchState.START) {
-                        // 添加积分
-                        EffectSendManager.sendEffect(playerFishEventFinalFish, player, "Fish", "FISH-MATCH-CAUGHT", null, null);
-                        FishMatchManager.addFishMatchPlayerIntegral(player, RegisterManager.getFishMatchPlayerIntegral().get(playerFishEventFinalFish));
-                    } else EffectSendManager.sendEffect(playerFishEventFinalFish, player, "Fish", "ITEM.CAUGHT", null, null);
+                        // 检查是否在钓鱼比赛并且是否正在进行，如果是的话那么就不用 ITEM.CAUGHT 而是 FISH-MATCH-CAUGHT
+                        if (FishMatchManager.isPlayerInTheFishMatch(player) && FishMatchManager.getFishMatchState() == FishMatchState.START) {
+                            // 添加积分
+                            EffectSendManager.sendEffect(playerFishEventFinalFish, player, "Fish", "FISH-MATCH-CAUGHT", null, null);
+                            FishMatchManager.addFishMatchPlayerIntegral(player, RegisterManager.getFishMatchPlayerIntegral().get(playerFishEventFinalFish));
+                        } else
+                            EffectSendManager.sendEffect(playerFishEventFinalFish, player, "Fish", "ITEM.CAUGHT", null, null);
 
-                    GivePlayerAdvancedFishItemEvent givePlayerAdvancedFishItemEvent = new GivePlayerAdvancedFishItemEvent(player, playerFishEventFinalFish, fishItem);
-                    Bukkit.getPluginManager().callEvent(givePlayerAdvancedFishItemEvent);
-                });
-                break;
+                        GivePlayerAdvancedFishItemEvent givePlayerAdvancedFishItemEvent = new GivePlayerAdvancedFishItemEvent(player, playerFishEventFinalFish, fishItem);
+                        Bukkit.getPluginManager().callEvent(givePlayerAdvancedFishItemEvent);
+                    });
         }
     }
 

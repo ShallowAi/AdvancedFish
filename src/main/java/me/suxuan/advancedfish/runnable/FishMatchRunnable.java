@@ -27,46 +27,46 @@ public class FishMatchRunnable {
         new BukkitRunnable() {
             @Override
             public void run() {
-                // 如果比赛并没有开始则不再执行
+
+                // If state is NONE, then return
                 if (state == FishMatchState.NONE) {
                     cancel();
                     return;
                 }
 
+                // Replace state to string
                 String stateString = state.toString();
 
                 switch (state) {
-                    // 根据不同的状态发送不同的效果给玩家
-                    case HOLD:
+                    // According to different state give player different affect
+                    case HOLD -> {
                         if (FishMatchManager.getFishMatchState() != state) FishMatchManager.setFishMatchState(state);
-                        // 当举办的时候清空上一次的 Map 记录
+
+                        // When HOLD state remove last MAP record
                         FishMatchManager.playerFishMatchIntegral.clear();
                         FishMatchManager.deleteFishMatchPlayerDataDirectory();
-
-                        if (!FishMatchManager.isPlayerInTheFishMatch(player)) FishMatchManager.addPlayerToFishMatch(player);
-                        Bukkit.getOnlinePlayers().forEach(onlinePlayer -> EffectSendManager.sendEffect("fishMatch", onlinePlayer, null, "HOLD", player, null));
+                        if (!FishMatchManager.isPlayerInTheFishMatch(player))
+                            FishMatchManager.addPlayerToFishMatch(player);
+                        Bukkit.getOnlinePlayers().forEach(onlinePlayer -> EffectSendManager.sendEffect
+                                ("fishMatch", onlinePlayer, null, "HOLD", player, null));
 
                         // 消息重复部分
                         if (ConfigManager.getFishMatchYaml().getBoolean("LOOP.ENABLE")) {
                             int time = (ConfigManager.getFishMatchYaml().getInt("LOOP.SECONDS") + 2) * 20;
                             startMessageLoopRunnable(ConfigManager.getFishMatchYaml().getBoolean("JOINED-PLAYER-SHOW-HOLD"), time, time);
                         }
-
-                        break;
-                    case COUNTDOWN_END:
-                    case COUNTDOWN:
+                    }
+                    case COUNTDOWN_END, COUNTDOWN -> {
                         // 倒计时
                         if (FishMatchManager.getFishMatchState() != state) FishMatchManager.setFishMatchState(state);
                         FishMatchManager.getFishMatchPlayers().forEach(fishMatchPlayers -> Bukkit.getOnlinePlayers().forEach(onlinePlayer -> EffectSendManager.sendEffect("fishMatch", fishMatchPlayers, null, stateString, null, countDown)));
-                       
-                        break;
-                    case START:
+                    }
+                    case START -> {
                         // 开启部分
                         if (FishMatchManager.getFishMatchState() != state) FishMatchManager.setFishMatchState(state);
                         FishMatchManager.getFishMatchPlayers().forEach(fishMatchPlayers -> Bukkit.getOnlinePlayers().forEach(onlinePlayer -> EffectSendManager.sendEffect("fishMatch", fishMatchPlayers, null, stateString, null, null)));
-                        
-                        break;
-                    case ENDED:
+                    }
+                    case ENDED -> {
                         // 结束部分
                         if (FishMatchManager.getFishMatchState() != state) FishMatchManager.setFishMatchState(state);
                         FishMatchManager.getFishMatchPlayers().forEach(fishMatchPlayers -> Bukkit.getOnlinePlayers().forEach(onlinePlayer -> EffectSendManager.sendEffect("fishMatch", fishMatchPlayers, null, stateString, null, null)));
@@ -81,43 +81,37 @@ public class FishMatchRunnable {
 
                         // 排序
                         FishMatchManager.playerFishMatchIntegral = FishMatchManager.sortFishMatchIntegralHashMap();
-                        
+
                         // 给予奖励
                         startRewardGive();
-                        
+
                         // 清除 文件在开始后再删除
                         FishMatchManager.getFishMatchPlayers().clear();
 
                         // 设置为冷却，在 FishMatchManager 中会在冷却时间过后设置为 NONE
                         FishMatchManager.setFishMatchState(FishMatchState.START_COUNTDOWN);
-
-                        break;
-                    case PLAYER_JOIN:
+                    }
+                    case PLAYER_JOIN -> {
                         // 玩家进入
                         FishMatchManager.addPlayerToFishMatch(player);
                         FishMatchManager.getFishMatchPlayers().forEach(fishMatchPlayers -> {
                             Player showPlayer = ConfigManager.getFishMatchYaml().getBoolean("PLAYER-JOIN-SHOW-ALL-PLAYER") ? fishMatchPlayers : player;
                             EffectSendManager.sendEffect("fishMatch", showPlayer, null, stateString, player, null);
                         });
-
-                        break;
-                    case PLAYER_REJOIN:
-                        EffectSendManager.sendEffect("fishMatch", player, null, stateString, player, null);
-
-                        break;
-                    case PLAYER_LEAVE:
+                    }
+                    case PLAYER_REJOIN ->
+                            EffectSendManager.sendEffect("fishMatch", player, null, stateString, player, null);
+                    case PLAYER_LEAVE -> {
                         // 玩家离开
                         FishMatchManager.removePlayerAtFishMatch(player);
                         EffectSendManager.sendEffect("fishMatch", player, null, stateString, player, null);
-
-                        break;
-                    case INSUFFICIENT:
+                    }
+                    case INSUFFICIENT -> {
                         // 当人数不够后，发送对应的效果，并清空已记录状态的玩家
                         FishMatchManager.setFishMatchState(FishMatchState.NONE);
                         FishMatchManager.getFishMatchPlayers().forEach(fishMatchPlayers -> EffectSendManager.sendEffect("fishMatch", fishMatchPlayers, null, stateString, null, null));
                         FishMatchManager.getFishMatchPlayers().clear();
-                        
-                        break;
+                    }
                 }
             }
         }.runTaskAsynchronously(plugin);
@@ -146,6 +140,13 @@ public class FishMatchRunnable {
     private static void startRewardGive() {
         Yaml yaml = ConfigManager.getFishMatchYaml();
         int later = yaml.getInt("LATER");
+
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+
+            }
+        }.runTaskLaterAsynchronously(plugin, later);
 
         Bukkit.getScheduler().runTaskLaterAsynchronously(plugin, () -> {
             yaml.setPathPrefix("REWARDGIVE");

@@ -25,36 +25,35 @@ import java.util.concurrent.ConcurrentHashMap;
 public class FishMatchManager {
     private static final Plugin plugin = main.getInstance();
 
-    // 记录进入钓鱼比赛的玩家
+    // Record players who join the match
     @Getter private static final List<Player> fishMatchPlayers = new ArrayList<>();
 
-    // 比赛状态
+    // Match state
     @Getter @Setter private static FishMatchState fishMatchState = FishMatchState.NONE;
 
-    // Map 记录最终
-    @Getter
-    public static Map<String, Double> playerFishMatchIntegral = new ConcurrentHashMap<>();
+    // Map record finally
+    @Getter public static Map<String, Double> playerFishMatchIntegral = new ConcurrentHashMap<>();
 
-    // 检查玩家的 Json 数据文件是否存在
+    // Check if player's JSON data exists
     public static boolean isFishMatchPlayerDataExists(Player player) {
         File json = new File(plugin.getDataFolder() + "/FishMatchPlayerData", player.getName() + ".json");
         return json.exists();
     }
 
-    // 使用 Json 查找钓鱼比赛数据的积分
+    // Use JSON file get Integral
     public static Double getJsonFishMatchPlayerIntegral(Player player) {
         String name = player.getName();
 
         // 这里先检查文件是否存在是为了防止玩家不在钓鱼的时候却添加了 Json 文件
         // 这个方法是查询文件数据积分，文件没有的话返回的就是 0.0 不会有任何影响
-        if (!FishMatchManager.isFishMatchPlayerDataExists(player)) return 0.0;
+        if (!isFishMatchPlayerDataExists(player)) return 0.0;
 
         Json json = new Json(name, plugin.getDataFolder() + "/FishMatchPlayerData");
 
         return json.getDouble("INTEGRAL");
     }
 
-    // 添加玩家积分
+    // Add Integral
     public static void addFishMatchPlayerIntegral(Player player, double integral) {
         String name = player.getName();
 
@@ -63,7 +62,7 @@ public class FishMatchManager {
         json.set("INTEGRAL", json.getDouble("INTEGRAL") + integral);
     }
 
-    // 设置玩家积分
+    // Set Integral
     public static void setFishMatchPlayerIntegral(Player player, double integral) {
         String name = player.getName();
 
@@ -72,32 +71,32 @@ public class FishMatchManager {
         json.set("INTEGRAL", integral);
     }
 
-    // 添加玩家加入比赛
+    // Add player into the match
     public static void addPlayerToFishMatch(Player player) {
         if (isPlayerInTheFishMatch(player)) return;
 
         fishMatchPlayers.add(player);
     }
 
-    // 删除已加入钓鱼比赛的玩家
+    // Delete player
     public static void removePlayerAtFishMatch(Player player) {
         if (!isPlayerInTheFishMatch(player)) return;
 
         fishMatchPlayers.remove(player);
     }
 
-    // 检查玩家是否在钓鱼比赛内
+    // Check whether player in the match
     public static boolean isPlayerInTheFishMatch(Player player) {
         return fishMatchPlayers.contains(player);
     }
 
-    // 删除玩家 Json 临时文件
+    // Delete player's JSON temp file
     public static void deleteFishMatchPlayerDataDirectory() {
         File file = new File(plugin.getDataFolder() + "/FishMatchPlayerData");
         deleteFile(file);
     }
 
-    // 遍历删除文件夹及其子文件
+    // Delete folder and file
     private static void deleteFile(File file) {
         if (file == null || !file.exists()) return;
 
@@ -107,21 +106,21 @@ public class FishMatchManager {
         for (File f : files) f.delete();
     }
 
-    // 创建一个比赛
+    // Create a match
     public static void createFishMatch(Player player) {
-        // 如果比赛正在冷却
+        // If match is cool down
         if (getFishMatchState() == FishMatchState.START_COUNTDOWN) {
             ConfigManager.getMessageYaml().getStringList("START-COOLDOWN").forEach(m -> player.sendMessage(CC.translate(m)));
             return;
         }
 
-        // 如果有比赛正在进行
+        // If match is running
         if (getFishMatchState() != FishMatchState.NONE) {
             ConfigManager.getMessageYaml().getStringList("MATCH-HAS-BEEN-START").forEach(m -> player.sendMessage(CC.translate(m)));
             return;
         }
 
-        // 如果人数不足
+        // If player count less than config
         if (Bukkit.getOnlinePlayers().size() < ConfigManager.getFishMatchYaml().getInt("MIN-PLAYER")) {
             FishMatchRunnable.startRunnable(player, FishMatchState.INSUFFICIENT, null);
             return;

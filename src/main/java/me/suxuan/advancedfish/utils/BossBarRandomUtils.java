@@ -4,16 +4,16 @@ import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
 
 /**
- * author:     2000000
- * project:    AdvancedFish
- * package:        me.twomillions.plugin.advancedfish.utils
- * className:      BossBarRandomUtils
- * date:    2022/12/3 22:04
+ * @author: CBer_SuXuan
+ * @project: AdvancedFish
+ * @className: BossBarRandomUtils
+ * @date: 2023/4/5 19:46
+ * @description: Random Boss Bar color and
  */
 public class BossBarRandomUtils {
 
-    // 来自于 Advanced Exp Booster
-    // 它同样由我编写，是非常好的插件 -> https://www.mcbbs.net/thread-1397855-1-1.html
+    // Come from Advanced Exp Booster
+    // Written by twomillions -> https://www.mcbbs.net/thread-1397855-1-1.html
 
     public static BarColor randomColor() {
         int num = (int) (Math.random() * 6);

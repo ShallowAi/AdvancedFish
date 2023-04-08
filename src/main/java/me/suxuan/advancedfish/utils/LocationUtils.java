@@ -5,14 +5,14 @@ import org.bukkit.Location;
 import org.bukkit.World;
 
 /**
- * author:     2000000
- * project:    AdvancedFish
- * package:        me.twomillions.plugin.advancedfish.utils
- * className:      LocationUtils
- * date:    2022/11/5 16:27
+ * @author: CBer_SuXuan
+ * @project: AdvancedFish
+ * @className: LocationUtils
+ * @date: 2023/4/5 19:42
+ * @description: Swap Coordinates and LocationString
  */
 public class LocationUtils {
-    // 坐标转换 - 鱼域
+    // Fish area coordinate transformation
     public static String locationToString(final Location location) {
         if (location == null) return "";
         return location.getWorld().getName() + ";" + location.getX() + ";" + location.getY() + ";" + location.getZ();

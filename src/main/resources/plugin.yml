@@ -2,7 +2,7 @@ name: AdvancedFish
 version: '${project.version}'
 main: me.suxuan.advancedfish.main
 api-version: 1.13
-authors: [ TCBer_SuXuan , xiaoyueyoqwq ]
+authors: [ CBer_SuXuan , xiaoyueyoqwq ]
 description: 一个高度自定义的高级钓鱼插件，高级钓鱼，不止是钓鱼!
 commands:
   advancedfish:
@@ -18,6 +18,8 @@ commands:
     description: 辅助指令，获取玩家所在的生物群系。
   getmaterial:
     description: 辅助指令，获取玩家手上物品的类型名称。
+  getlocation:
+    description: 辅助指令，获取玩家脚下的方块坐标。
   fishmatch:
     description: 钓鱼比赛指令。
   advancedconsole:

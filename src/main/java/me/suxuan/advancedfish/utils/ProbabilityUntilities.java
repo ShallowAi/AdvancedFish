@@ -5,11 +5,11 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * author:     2000000
- * project:    AdvancedFish
- * package:        me.twomillions.plugin.advancedfish.utils
- * className:      ProbabilityUntilities
- * date:    2022/10/31 12:44
+ * @author: CBer_SuXuan
+ * @project: AdvancedFish
+ * @className: ProbabilityUntilities
+ * @date: 2023/4/5 19:32
+ * @description: Fish Probability
  */
 public class ProbabilityUntilities {
     // by https://www.spigotmc.org/threads/getting-random-key-from-hashmap-with-chance.199285/#post-2073868

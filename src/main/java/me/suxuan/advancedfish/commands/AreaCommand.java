@@ -10,37 +10,39 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.util.StringUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
 /**
- * author:     2000000
- * project:    AdvancedFish
- * package:        me.twomillions.plugin.advancedfish.commands
- * className:      AreaCommand
- * date:    2022/11/5 18:50
+ * @author: CBer_SuXuan
+ * @project: AdvancedFish
+ * @className: AreaCommand
+ * @date: 2023/4/6 19:03
+ * @description: Command area
  */
 public class AreaCommand implements TabExecutor {
     private static final Plugin plugin = main.getInstance();
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        if (!(sender instanceof Player)) {
+        if (!(sender instanceof Player player)) {
             sender.sendMessage(" ");
-            sender.sendMessage(CC.translate("&e此服务器正在使用 Advanced Fish 插件。 版本: " + plugin.getDescription().getVersion() + ", 作者: 2000000。"));
+            sender.sendMessage(CC.translate("&e此服务器正在使用 Advanced Fish 插件。 版本: " +
+                    plugin.getDescription().getVersion() + ", 作者: CBer_SuXuan & xiaoyueyouqwq"));
             sender.sendMessage(" ");
             return false;
         }
 
-        Player player = (Player) sender;
-
         if (!player.hasPermission(ConfigManager.getAdvancedFishYaml().getString("ADMIN-PERM"))) {
             sender.sendMessage(" ");
-            sender.sendMessage(CC.translate("&e此服务器正在使用 Advanced Fish 插件。 版本: " + plugin.getDescription().getVersion() + ", 作者: 2000000。"));
+            sender.sendMessage(CC.translate("&e此服务器正在使用 Advanced Fish 插件。 版本: " +
+                    plugin.getDescription().getVersion() + ", 作者: CBer_SuXuan & xiaoyueyouqwq"));
             sender.sendMessage(" ");
             return true;
         }
@@ -79,7 +81,7 @@ public class AreaCommand implements TabExecutor {
             }
 
             AreaManager.createArea(args[1]);
-            player.sendMessage(CC.translate("&a您已创建此鱼域，接下来您需要对其进行命名，使用: /Area setName 指令吧!"));
+            player.sendMessage(CC.translate("&a您已创建此鱼域，接下来您需要对其进行命名，使用: /area setName <鱼域名> 指令吧!"));
             return true;
         }
 
@@ -109,7 +111,7 @@ public class AreaCommand implements TabExecutor {
             }
 
             if (AreaManager.setAreaName(args[1], args[2]))
-                player.sendMessage(CC.translate("&a您已命名此鱼域，接下来您需要对其范围进行规定，使用: /Area setMax 指令在最高点创建一个定位点!"));
+                player.sendMessage(CC.translate("&a您已命名此鱼域，接下来您需要对其范围进行规定，使用: /area setMax <鱼域文件名> 指令在最高点创建一个定位点!"));
             else
                 player.sendMessage(CC.translate("&c命名出错! 请确定此鱼域是否存在!"));
 
@@ -123,7 +125,7 @@ public class AreaCommand implements TabExecutor {
             }
 
             if (AreaManager.setAreaMax(args[1], player))
-                player.sendMessage(CC.translate("&a您已设置最高点，接下来您需要设置最低点，以便其构成一个类创世神的长方体，使用: /Area setMin 指令在最低点创建一个定位点!"));
+                player.sendMessage(CC.translate("&a您已设置最高点，接下来您需要设置最低点，以便其构成一个类创世神的长方体，使用: /area setMin <鱼域文件名> 指令在最低点创建一个定位点!"));
             else
                 player.sendMessage(CC.translate("&c设置出错! 请确定此鱼域是否存在!"));
 
@@ -152,8 +154,26 @@ public class AreaCommand implements TabExecutor {
     public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, @NotNull String[] args) {
         if (!sender.hasPermission(ConfigManager.getAdvancedFishYaml().getString("ADMIN-PERM"))) return null;
 
-        List<String> result = new ArrayList<>(AreaManager.getArea());
-        Bukkit.getOnlinePlayers().forEach(p -> result.add(p.getName()));
-        return result;
+        if (args.length == 1) {
+            return StringUtil.copyPartialMatches(args[0],
+                    Arrays.asList("getAreaList", "create", "delete", "setName", "setMax", "setMin"), new ArrayList<>());
+        } else if (args.length == 2) {
+            List<String> result = new ArrayList<>(AreaManager.getArea());
+            if (args[0].equalsIgnoreCase("create")) {
+                return StringUtil.copyPartialMatches(args[1],
+                        List.of("<Fish-area File-name>"), new ArrayList<>());
+            } else if (!args[0].equalsIgnoreCase("getAreaList")) {
+                return StringUtil.copyPartialMatches(args[1], result, new ArrayList<>());
+            }
+        } else if (args.length == 3) {
+            if (args[0].equalsIgnoreCase("setName")) {
+                return StringUtil.copyPartialMatches(args[2],
+                        List.of("<Fish-area Custom-name>"), new ArrayList<>());
+            }
+        } else {
+            return new ArrayList<>();
+        }
+
+        return new ArrayList<>();
     }
 }

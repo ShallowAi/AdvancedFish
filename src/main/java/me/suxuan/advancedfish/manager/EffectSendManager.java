@@ -316,7 +316,7 @@ public class EffectSendManager {
 
         if (actionBarMessage.equals("") || actionBarTime == 0) return;
 
-        // 由于 Action Bar 并没有具体的淡出淡入显示时间参数
+        // 由于 Action Bar 并没有具体淡出淡入显示时间参数
         // 所以只能通过 Runnable 发送
 
         new BukkitRunnable() {

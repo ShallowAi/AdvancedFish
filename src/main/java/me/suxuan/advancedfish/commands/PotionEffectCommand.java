@@ -12,28 +12,25 @@ import org.fusesource.jansi.Ansi;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * author:     2000000
- * project:    AdvancedFish
- * package:        me.twomillions.plugin.advancedfish.commands
- * className:      PotionEffectCommand
- * date:    2022/11/4 13:45
+ * @author: CBer_SuXuan
+ * @project: AdvancedFish
+ * @className: PotionEffectCommand
+ * @date: 2023/4/5 23:09
+ * @description: Get potion on hand
  */
 public class PotionEffectCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        if (!(sender instanceof Player)) {
+        if (!(sender instanceof Player player)) {
             Bukkit.getLogger().warning(Ansi.ansi().fg(Ansi.Color.GREEN).boldOff().toString() + "此指令只有玩家可以使用。");
             return false;
         }
 
-        Player player = (Player) sender;
         if (!player.hasPermission(ConfigManager.getAdvancedFishYaml().getString("POTION-EFFECT-PERM"))) {
             player.sendMessage(CC.translate(ConfigManager.getMessageYaml().getString("NO-PERM-MESSAGE")));
             return false;
         }
 
-        // Potion 被弃用 rip
-        // 0.0.9 后将不再获得原版药水名称，而是服务端所能识别的 PotionEffectType 名称
         PotionMeta meta;
 
         // 直接判断是不是药水的类型太多了，直接捕获 ClassCastException 异常并返回负面消息
@@ -51,7 +48,8 @@ public class PotionEffectCommand implements CommandExecutor {
 
         // 返回 PotionEffectType 名称
         player.sendMessage(CC.CHAT_BAR);
-        player.sendMessage(CC.translate("&e&o您手中的物品药水效果: &7" + meta.getBasePotionData().getType().getEffectType().getName()));
+        player.sendMessage(CC.translate("&e&o您手中的物品药水效果: &7" +
+                meta.getBasePotionData().getType().getEffectType().getName()));
         player.sendMessage(CC.CHAT_BAR);
 
         return true;

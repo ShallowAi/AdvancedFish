@@ -12,37 +12,39 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.util.StringUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
 /**
- * author:     2000000
- * project:    AdvancedFish
- * package:        me.twomillions.plugin.advancedfish.commands
- * className:      MainCommand
- * date:    2022/10/31 13:01
+ * @author: CBer_SuXuan
+ * @project: AdvancedFish
+ * @className: MainCommand
+ * @date: 2023/4/5 21:13
+ * @description: Main command
  */
 public class MainCommand implements TabExecutor {
-    private static final Plugin plugin = main.getInstance();
 
+    private static final Plugin plugin = main.getInstance();
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        if (!(sender instanceof Player)) {
+        if (!(sender instanceof Player player)) {
             sender.sendMessage(" ");
-            sender.sendMessage(CC.translate("&e此服务器正在使用 Advanced Fish 插件。 版本: " + plugin.getDescription().getVersion() + ", 作者: 2000000。"));
+            sender.sendMessage(CC.translate("&e此服务器正在使用 Advanced Fish 插件。 版本: " +
+                    plugin.getDescription().getVersion() + ", 作者: CBer_SuXuan & xiaoyueyouqwq"));
             sender.sendMessage(" ");
             return false;
         }
 
-        Player player = (Player) sender;
-
         if (!player.hasPermission(ConfigManager.getAdvancedFishYaml().getString("ADMIN-PERM"))) {
             sender.sendMessage(" ");
-            sender.sendMessage(CC.translate("&e此服务器正在使用 Advanced Fish 插件。 版本: " + plugin.getDescription().getVersion() + ", 作者: 2000000。"));
+            sender.sendMessage(CC.translate("&e此服务器正在使用 Advanced Fish 插件。 版本: " +
+                    plugin.getDescription().getVersion() + ", 作者: CBer_SuXuan & xiaoyueyouqwq"));
             sender.sendMessage(" ");
             return true;
         }
@@ -135,7 +137,7 @@ public class MainCommand implements TabExecutor {
         }
 
         if (args[0].toLowerCase(Locale.ROOT).equals("reload")) {
-            // 卸载已有配方后再添加以防止插件重载导致的配方重复错误
+            // Unload existing recipes and download in case reload plugin cause recipes repeat error
             RegisterManager.getRegisterRecipe().forEach(key -> {
                 if (main.getServerVersion() >= 1014) Bukkit.removeRecipe(key);
                 if (main.getServerVersion() >= 1013) Bukkit.getOnlinePlayers().forEach(onlinePlayer -> onlinePlayer.undiscoverRecipe(key));
@@ -153,12 +155,34 @@ public class MainCommand implements TabExecutor {
 
     @Nullable
     @Override
-    public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, @NotNull String[] args) {
+    public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (!sender.hasPermission(ConfigManager.getAdvancedFishYaml().getString("ADMIN-PERM"))) return null;
 
-        List<String> result = new ArrayList<>(RegisterManager.getRegisterFish());
-        result.addAll(RegisterManager.getRegisterBait());
-        Bukkit.getOnlinePlayers().forEach(p -> result.add(p.getName()));
-        return result;
+        if (args.length == 1) {
+            return StringUtil.copyPartialMatches(args[0],
+                    Arrays.asList("getFishList", "getFishItem", "getFurnaceFishItem", "getBaitList", "getBaitItem", "reload"), new ArrayList<>());
+        } else if (args.length == 2) {
+            if (args[0].equalsIgnoreCase("getFishItem") || args[0].equalsIgnoreCase("getFurnaceFishItem")) {
+                List<String> result = new ArrayList<>(RegisterManager.getRegisterFish());
+                return StringUtil.copyPartialMatches(args[1], result, new ArrayList<>());
+            } else if (args[0].equalsIgnoreCase("getBaitItem")) {
+                List<String> result = new ArrayList<>(RegisterManager.getRegisterBait());
+                return StringUtil.copyPartialMatches(args[1], result, new ArrayList<>());
+            } else {
+                return new ArrayList<>();
+            }
+        } else if (args.length == 3) {
+            if (args[0].equalsIgnoreCase("getFishItem") || args[0].equalsIgnoreCase("getFurnaceFishItem") ||
+                    args[0].equalsIgnoreCase("getBaitItem")) {
+                List<String> names = new ArrayList<>();
+                for (Player target : Bukkit.getOnlinePlayers()) {
+                    names.add(target.getName());
+                }
+                return StringUtil.copyPartialMatches(args[2], names, new ArrayList<>());
+            } else {
+                return new ArrayList<>();
+            }
+        }
+        return new ArrayList<>();
     }
 }

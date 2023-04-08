@@ -33,7 +33,7 @@ public class FishManager {
     private static final Plugin plugin = main.getInstance();
 
     // Check if player can catch fish
-    public static boolean checkFish(String fishName, Player player) {
+    public static boolean canCatchFish(String fishName, Player player) {
         Yaml fish = new Yaml(fishName, plugin.getDataFolder() + "/Fish");
 
         // Set path prefix
@@ -186,18 +186,18 @@ public class FishManager {
         return true;
     }
 
-    // 检查所有的鱼类，并返回玩家可以钓的所有鱼
+    // Check all registered fish, and return all fishes that player can catch
     public static List<String> checkAllFish(Player player) {
         List<String> fishList = new ArrayList<>();
 
         RegisterManager.getRegisterFish().forEach(fish -> {
-            if (checkFish(fish, player)) fishList.add(fish);
+            if (canCatchFish(fish, player)) fishList.add(fish);
         });
 
         return fishList;
     }
 
-    // 获取最终的鱼
+    // Get final catch fish
     public static String getFinalFish(Player player) {
         ProbabilityUntilities probabilities = new ProbabilityUntilities();
 
@@ -207,6 +207,7 @@ public class FishManager {
         ItemStack bait = player.getInventory().getItemInOffHand();
         AtomicBoolean noBait = new AtomicBoolean(false);
 
+        // Check bait and
         BaitManager.getAllBaitItems().forEach(b -> {
             if (ItemUtils.checkItemStackSame(b, bait)) noBait.set(true);
         });
@@ -215,23 +216,24 @@ public class FishManager {
         String baitName = bait.getType().equals(Material.AIR) || !noBait.get() ? null : BaitManager.baitItemToBaitName(bait);
         String biomeName = world.getBiome(location.getBlockX(), location.getBlockZ()).toString();
 
-        checkAllFish(player).forEach(fish -> probabilities.addChance(fish, FishManager.getFishProbability(fish, baitName, biomeName, AreaManager.getPlayerAreaName(player))));
+        checkAllFish(player).forEach(fish -> probabilities.addChance(fish,
+                FishManager.getFishProbability(fish, baitName, biomeName, AreaManager.getPlayerAreaName(player))));
 
         return probabilities.getRandomElement().toString();
     }
 
-    // 获取此鱼类的 ItemStack
+    // Get fish ItemStack
     public static ItemStack getFishItem(String fishName, String fishOwnerName) {
         return ItemUtils.buildItemStack(fishName, fishOwnerName, "Fish", "ITEM");
     }
 
-    // 获取此鱼类的熔炉食谱 ItemStack
+    // Get fish furnace ItemStack
     public static ItemStack getFurnaceItem(String fishName) {
         return ItemUtils.buildItemStack(fishName, "<owner>", "Fish", "FURNACE-RECIPE.ITEM");
     }
 
     // Fish Item Stack to Furnace Item Stack
-    // 钓手继承
+    // Owner inherit, find
     public static ItemStack fishItemToFurnaceItem(ItemStack fishItem) {
         ItemMeta fishItemMeta = fishItem.getItemMeta();
 
@@ -257,7 +259,7 @@ public class FishManager {
         return furnaceItem;
     }
 
-    // 钓手继承 - 多态
+    // Owner inherit, direct
     public static ItemStack fishItemToFurnaceItem(ItemStack fishItem, String setFishOwnerName) {
         ItemMeta fishItemMeta = fishItem.getItemMeta();
 
@@ -282,14 +284,12 @@ public class FishManager {
         return furnaceItem;
     }
 
-    // ItemStack 获取 fishName
-    // 11.2 使用 map 对应查找，节省性能
+    // get fishName from ItemStack with map in RegisterManager
     public static String fishItemToFishName(ItemStack fishItem) {
         return RegisterManager.getItemAndFish().get(fishItem.getItemMeta().getDisplayName());
     }
 
-    // 炼制的 ItemStack 获取 fishName
-    // 使用map查找
+    // get fishName from furnace with map in RegisterManager
     public static String furnaceItemToFishName(ItemStack fishItem) {
         return RegisterManager.getFurnaceItemAndFish().get(fishItem.getItemMeta().getDisplayName());
     }
@@ -344,19 +344,18 @@ public class FishManager {
         return playerName;
     }
 
-    // 获取指定鱼的钓上此鱼的几率
-    // 在 0.0.7-SNAPSHOT 后鱼的几率将不止鱼类所设定的，其也包括鱼饵，生物群系，鱼群等一系列复杂的增益叠加
+    // Probability of get fish
     public static int getFishProbability(String fishName, String baitName, String biomeName, String areaName) {
         Yaml fish = new Yaml(fishName, plugin.getDataFolder() + "/Fish");
 
-        // 直接获取基础的概率增加
+        // Base probability
         int baseGain = fish.getInt("ITEM.PROBABILITY");
 
         AtomicInteger baitGain = new AtomicInteger();
         AtomicInteger biomeGain = new AtomicInteger();
         AtomicInteger areaGain = new AtomicInteger();
 
-        // 通过遍历获得鱼饵所要添加的几率
+        // Traversal bait probability
         fish.getStringList("BAIT.SPECIFIC").forEach(s -> {
             if (baitName == null || s == null || s.length() <= 1) return;
             if (!s.contains(baitName)) return;
@@ -375,7 +374,7 @@ public class FishManager {
             baitGain.set(Integer.parseInt(getBait[1]));
         });
 
-        // 通过遍历获得对应生物群系所要添加的几率
+        // Traversal biome probability
         fish.getStringList("BIOME.SPECIFIC").forEach(s -> {
             if (biomeName == null || s == null || s.length() <= 1) return;
             if (!s.contains(biomeName)) return;
@@ -394,7 +393,7 @@ public class FishManager {
             biomeGain.set(Integer.parseInt(getBiome[1]));
         });
 
-        // 通过遍历获得对应鱼域所要添加的几率
+        // Traversal fish area probability
         fish.getStringList("AREA.SPECIFIC").forEach(a -> {
             if (areaName == null || a == null || a.length() <= 1) return;
             if (!a.contains(areaName)) return;
@@ -416,69 +415,69 @@ public class FishManager {
         return baseGain + baitGain.get() + biomeGain.get() + areaGain.get();
     }
 
-    // 获取此鱼是否可以被吃
+    // Can eat?
     public static boolean getFishCanEat(String fishName) {
         return RegisterManager.getFishEatList().contains(fishName);
     }
 
-    // 获取此鱼是否取消原经验
+    // Cancel EXP?
     public static boolean getFishCancelDropExp(String fishName) {
         return RegisterManager.getFishCancelDropExpList().contains(fishName);
     }
 
-    // 获取此鱼是否可以被放置
+    // Can build?
     public static boolean getFishCanBuild(String fishName) {
         return RegisterManager.getFishBuildList().contains(fishName);
     }
 
-    // 此鱼是否可以用于合成
+    // Can craft?
     public static boolean getFishCanCraft(String fishName) {
         return RegisterManager.getFishCraftList().contains(fishName);
     }
 
-    // 此鱼是否可以用于熔炉
+    // 此Can combustion?
     public static boolean getFishCanCombustion(String fishName) {
         return RegisterManager.getFishCombustionList().contains(fishName);
     }
 
-    // 此鱼是否可以用与铁砧
+    // Can anvil?
     public static boolean getFishCanAnvil(String fishName) {
         return RegisterManager.getFishAnvilList().contains(fishName);
     }
 
-    // 此鱼是否可以用于附魔
+    // Can enchant?
     public static boolean getFishCanEnchant(String fishName) {
         return RegisterManager.getFishEnchantList().contains(fishName);
     }
 
-    // 此鱼是否开启自定义食谱
+    // Custom recipe?
     public static boolean getFishEnableFurnaceRecipe(String fishName) {
         return RegisterManager.getFishFurnaceRecipeList().contains(fishName);
     }
 
-    // 鱼类烹饪 - 上次没睡醒忘记写了
+    // Cooked fish
 
-    // 获取此鱼是否可以被放置
+    // Can build?
     public static boolean getFurnaceCanBuild(String fishName) {
         return RegisterManager.getFurnaceBuildList().contains(fishName);
     }
 
-    // 此鱼是否可以用于合成
+    // Can craft?
     public static boolean getFurnaceCanCraft(String fishName) {
         return RegisterManager.getFurnaceCraftList().contains(fishName);
     }
 
-    // 此鱼是否可以用于熔炉
+    // Can combustion?
     public static boolean getFurnaceCanCombustion(String fishName) {
         return RegisterManager.getFurnaceCombustionList().contains(fishName);
     }
 
-    // 此鱼是否可以用与铁砧
+    // Can anvil?
     public static boolean getFurnaceCanAnvil(String fishName) {
         return RegisterManager.getFurnaceAnvilList().contains(fishName);
     }
 
-    // 此鱼是否可以用于附魔
+    // Can enchant?
     public static boolean getFurnaceCanEnchant(String fishName) {
         return RegisterManager.getFurnaceEnchantList().contains(fishName);
     }

@@ -14,6 +14,7 @@ ITEM:
   MATERIAL: BROWN_MUSHROOM
   URL-HEAD: ""
   DATA: 0
+  MODEL-DATA: 0
   AMOUNT: 1
   LORE:
     - "&8&m----------------------------"

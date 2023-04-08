@@ -10,10 +10,13 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -23,19 +26,19 @@ import java.util.Locale;
  * className:      FishMatchCommand
  * date:    2022/11/9 13:11
  */
-public class FishMatchCommand implements CommandExecutor {
+public class FishMatchCommand implements TabExecutor {
     private static final Plugin plugin = main.getInstance();
     
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
-        if (!(sender instanceof Player)) {
+        if (!(sender instanceof Player player)) {
             sender.sendMessage(" ");
-            sender.sendMessage(CC.translate("&e此服务器正在使用 Advanced Fish 插件。 版本: " + plugin.getDescription().getVersion() + ", 作者: 2000000。"));
+            sender.sendMessage(CC.translate("&e此服务器正在使用 Advanced Fish 插件。 版本: " +
+                    plugin.getDescription().getVersion() + ", 作者: CBer_SuXuan & xiaoyueyouqwq"));
             sender.sendMessage(" ");
             return false;
         }
 
-        Player player = (Player) sender;
         String holdPerm = ConfigManager.getAdvancedFishYaml().getString("FISH-MATCH-HOLD");
         String setPerm = ConfigManager.getAdvancedFishYaml().getString("FISH-MATCH-SET");
 
@@ -59,6 +62,7 @@ public class FishMatchCommand implements CommandExecutor {
             return true;
         }
 
+        // Check /fishmatch start
         if (args[0].toLowerCase(Locale.ROOT).equals("start")) {
             if (!player.hasPermission(holdPerm)) {
                 player.sendMessage(CC.translate(ConfigManager.getMessageYaml().getString("NO-PERM-MESSAGE")));
@@ -138,5 +142,11 @@ public class FishMatchCommand implements CommandExecutor {
         }
 
         return false;
+    }
+
+    @Nullable
+    @Override
+    public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+        return null;
     }
 }
