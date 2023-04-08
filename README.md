@@ -1,4 +1,6 @@
 # 🎣Advanced Fish - 高级钓鱼
+![code_author](https://img.shields.io/badge/code__author-CBer__SuXuan-orange)
+![wiki_author](https://img.shields.io/badge/wiki__author-xiaoyueyoqwq-blue)
 
 ## 此插件原作者已停止维护! <br />此仓库为xiaoyueyoqwq和CBer_SuXuan代理更新！
 
@@ -58,7 +60,7 @@
 - 您至少需要一条没有任何限制便可以钓上来的鱼来防止没有内容而引起的报错。
 - 如果您的版本低于 1.16 那么您需要重写默认的配置文件，默认的配置文件内含有高版本附魔与物品，您需要改写它们。
 - 此插件会使用自定义鱼类物品的名字以获取对应数据，这将意味着您每一条鱼、鱼饵、食用自定义物品都只能够有一个名字，无论是文件名还是自定义物品的物品名。
-> 作者的话
+> 原作者的话
 - 我在编写此插件时较为急促，这导致此插件的代码很多地方很 Gay
 - 此插件也许不会再存在任何大更新，我仅仅只是保证正常运行不出错，重写可能在计划中，但是依然待考虑。
 ---
