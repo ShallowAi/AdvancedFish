@@ -16,7 +16,6 @@ public class ProbabilityUntilities {
 
     private List<Chance> chances;
     private int sum;
-    private Random random;
 
     private class Chance {
         private int upperLimit;
@@ -41,13 +40,11 @@ public class ProbabilityUntilities {
         }
     }
     public ProbabilityUntilities() {
-        this.random = new Random();
         this.chances = new ArrayList<>();
         this.sum = 0;
     }
 
     public ProbabilityUntilities(long seed) {
-        this.random = new Random(seed);
         this.chances = new ArrayList<>();
         this.sum = 0;
     }
@@ -60,7 +57,8 @@ public class ProbabilityUntilities {
     }
 
     public Object getRandomElement() {
-        int index = this.random.nextInt(this.sum);
+        Random random = new Random();
+        int index = random.nextInt(this.sum);
         for (Chance chance : this.chances) {
             if (chance.getLowerLimit() <= index && chance.getUpperLimit() > index) {
                 return chance.getElement();
