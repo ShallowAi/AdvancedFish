@@ -1,8 +1,9 @@
 package me.suxuan.advancedfish.utils;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 /**
  * @author: CBer_SuXuan
@@ -14,7 +15,7 @@ import java.util.Random;
 public class ProbabilityUntilities {
     // by https://www.spigotmc.org/threads/getting-random-key-from-hashmap-with-chance.199285/#post-2073868
 
-    private List<Chance> chances;
+    private Set<Chance> chances;
     private int sum;
 
     private class Chance {
@@ -36,22 +37,20 @@ public class ProbabilityUntilities {
             return this.element;
         }
         public String toString() {
-            return "[" + Integer.toString(this.lowerLimit) + "|" + Integer.toString(this.upperLimit) + "]: " + this.element.toString();
+            return "[" + this.lowerLimit + "|" + this.upperLimit + "]: " + this.element.toString();
         }
     }
     public ProbabilityUntilities() {
-        this.chances = new ArrayList<>();
+        this.chances = new HashSet<>();
         this.sum = 0;
     }
 
     public ProbabilityUntilities(long seed) {
-        this.chances = new ArrayList<>();
+        this.chances = new HashSet<>();
         this.sum = 0;
     }
 
     public void addChance(Object element, int chance) {
-        if (this.chances.contains(element)) return;
-
         this.chances.add(new Chance(element, this.sum, this.sum + chance));
         this.sum = this.sum + chance;
     }
